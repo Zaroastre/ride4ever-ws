@@ -1,0 +1,76 @@
+version: '3.9'
+
+# Services definitions
+services:
+
+  # SQL service
+  ride4ever-database:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ride4ever
+      MARIADB_USER: ineo
+      MARIADB_PASSWORD: ineo
+    ports: 
+      - 3306:3306
+    
+
+  # LDAP service
+  # ldap:
+  #   image: ldap
+  #   restart: always
+  #   ports: 
+  #     - 389:389
+
+#   # Asterisk service
+#   asterisk:
+#     image: asterisk
+#     restart: always
+#     ports: 
+#       - 5060:5060
+#       - 5061:5061
+
+#   # Nginx service
+#   nginx:
+#     image: nginx
+#     restart: always
+#     environment:
+#       - NGINX_HOST=foobar.com
+#       - NGINX_PORT=80
+#     ports: 
+#       - 80:80
+#       - 443:443
+
+  # ride4ever-WS
+  ride4ever-ws:
+    image: ride4ever-ws
+    restart: always
+    depends_on: 
+      - ride4ever-database
+      - ride4ever-ldap
+    links:
+      - "ride4ever-database"
+    ports: 
+      - 9600:9600
+      - 9601:9601
+      - 9602:9602
+
+      
+#   # ride4ever-UI
+#   ride4ever-ui:
+#     image: ride4ever-ui
+#     restart: always
+#     ports: 
+#       - 3000:3000
+
+# # Volumes definitions
+# volumes: 
+#   db_data: {}
+#   ftp_data: {}
+
+networks:
+  default:
+    external: true
+    name: network-ride4ever-public
+  frontend:
+    driver:  
