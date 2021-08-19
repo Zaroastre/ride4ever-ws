@@ -10,24 +10,23 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import io.nirahtech.ride4ever.runtime.ApplicationShutdownHook;
-import io.nirahtech.ride4ever.runtime.ApplicationUncaughtExceptionHandler;
+import io.nirahtech.ride4ever.application.runtime.ApplicationShutdownHook;
+import io.nirahtech.ride4ever.application.runtime.ApplicationUncaughtExceptionHandler;
 
 /**
  * Class that represents the entry point of the application.
- * 
+ *
  * @author METIVIER Nicolas
  * @since 0.0.1
  */
 @SpringBootApplication
-// @EnableConfigurationProperties(StorageProperties.class)
 public class NirahRide4EverApplication {
 
     /**
      * Default NirahRide4EverApplication Constrcutor.
      */
     public NirahRide4EverApplication() {
-        
+
     }
 
     /**
@@ -41,7 +40,7 @@ public class NirahRide4EverApplication {
 
     /**
      * Entry point of the program.
-     * 
+     *
      * @param args Command line arguments.
      */
     public static void main(final String[] arguments) {

@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "licensePlate" }))
 public class Motorbike implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int identifier;
@@ -30,6 +30,7 @@ public class Motorbike implements Serializable {
     private String picture;
     @Enumerated(EnumType.STRING)
     private MotorbikeType type;
+    private boolean isRestrained = false;
 
     public Motorbike() {
 
@@ -119,5 +120,12 @@ public class Motorbike implements Serializable {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-    
+
+    public void setIsRestrained(boolean isRestrained) {
+        this.isRestrained = isRestrained;
+    }
+    public boolean getIsRestrained() {
+        return isRestrained;
+    }
+
 }

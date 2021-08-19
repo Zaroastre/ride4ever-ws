@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import io.nirahtech.ride4ever.core.environment.Pilot;
-import io.nirahtech.ride4ever.exceptions.DuplicateConstraintException;
+import io.nirahtech.ride4ever.infrastructure.exceptions.DuplicateConstraintException;
 
 public final class PilotService implements PilotApi {
 

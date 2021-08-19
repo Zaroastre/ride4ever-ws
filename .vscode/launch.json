@@ -9,13 +9,6 @@
             "name": "Launch NirahRide4EverApplication",
             "request": "launch",
             "mainClass": "io.nirahtech.ride4ever.NirahRide4EverApplication",
-            "projectName": "airatis-stap"
-        },
-        {
-            "type": "java",
-            "name": "Launch NirahRide4EverApplication",
-            "request": "launch",
-            "mainClass": "io.nirahtech.ride4ever.NirahRide4EverApplication",
             "projectName": "ride4ever"
         }
     ]

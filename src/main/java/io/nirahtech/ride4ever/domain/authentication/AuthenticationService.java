@@ -12,9 +12,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.nirahtech.ride4ever.core.environment.Pilot;
 import io.nirahtech.ride4ever.domain.pilot.PilotService;
-import io.nirahtech.ride4ever.exceptions.BadRequestException;
-import io.nirahtech.ride4ever.exceptions.InternalProcessException;
-import io.nirahtech.ride4ever.exceptions.ResourceNotFoundException;
+import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
+import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
+import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
 
 public final class AuthenticationService implements AuthenticationApi {
 
@@ -22,7 +22,7 @@ public final class AuthenticationService implements AuthenticationApi {
 
     private static final PilotService PILOT_SERVICE = PilotService.getInstance();
     private Map<Credential, Session> sessions = new HashMap<>();
-    
+
     @Override
     public Session login(Credential credential) throws RuntimeException {
         String jwt = null;
@@ -64,6 +64,6 @@ public final class AuthenticationService implements AuthenticationApi {
     @Override
     public void logout(Session session) throws RuntimeException {
         // TODO Auto-generated method stub
-        
+
     }
 }
