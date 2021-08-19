@@ -83,7 +83,11 @@ public final class PilotService implements PilotApi {
     @Override
     public Pilot findByEmail(final String email) {
         Pilot pilot = null;
+        System.out.println(email);
+        System.out.println(DATABASE.size());
+        System.out.println(DATABASE);
         Optional<Pilot> result = DATABASE.values().stream().filter(entity -> entity.getEmail().equalsIgnoreCase(email)).findFirst();
+        System.out.println(result.isPresent());
         if (result.isPresent()) {
             pilot = result.get();
         }

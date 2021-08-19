@@ -3,6 +3,7 @@ package io.nirahtech.ride4ever.domain.pilot;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ public final class PilotController implements PilotApi {
     private final PilotService service = PilotService.getInstance();
 
     @Override
-    public Pilot create(Pilot entity) {
+    public Pilot create(@RequestBody Pilot entity) {
         return this.service.create(entity);
     }
 
@@ -26,7 +27,7 @@ public final class PilotController implements PilotApi {
     }
 
     @Override
-    public Pilot update(Integer identifier, Pilot entity) {
+    public Pilot update(Integer identifier, @RequestBody Pilot entity) {
         return this.service.update(identifier, entity);
     }
 
