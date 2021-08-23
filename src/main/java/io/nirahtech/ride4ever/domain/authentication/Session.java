@@ -2,23 +2,23 @@ package io.nirahtech.ride4ever.domain.authentication;
 
 import java.io.Serializable;
 
-import io.nirahtech.ride4ever.core.environment.Pilot;
+import io.nirahtech.ride4ever.core.environment.Biker;
 
 final class Session implements Serializable {
-    private final Pilot pilot;
+    private final Biker biker;
     private final String jwt;
 
-    public Session(final String jwt, final Pilot pilot) {
+    public Session(final String jwt, final Biker biker) {
         this.jwt = jwt;
-        this.pilot = pilot;
+        this.biker = biker;
     }
 
     public String getJwt() {
         return jwt;
     }
     
-    public Pilot getPilot() {
-        return pilot;
+    public Biker getBiker() {
+        return biker;
     }
 
 }

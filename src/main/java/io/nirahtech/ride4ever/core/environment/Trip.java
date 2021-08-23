@@ -14,12 +14,12 @@ public class Trip implements Serializable {
     private String description = null;
     
     @Column(nullable = false)
-    private Pilot organizer;
+    private Biker organizer;
     private int maxPilots = 0;
 
-    private List<Pilot> candidates;
+    private List<Biker> candidates;
 
-    private List<Pilot> pilots;
+    private List<Biker> pilots;
 
     private RoadTripType roadTripType;
 
@@ -53,11 +53,11 @@ public class Trip implements Serializable {
         this.description = description;
     }
 
-    public Pilot getOrganizer() {
+    public Biker getOrganizer() {
         return organizer;
     }
 
-    public void setOrganizer(Pilot organizer) {
+    public void setOrganizer(Biker organizer) {
         this.organizer = organizer;
     }
 
@@ -69,19 +69,19 @@ public class Trip implements Serializable {
         this.maxPilots = maxPilots;
     }
 
-    public List<Pilot> getCandidates() {
+    public List<Biker> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(List<Pilot> candidates) {
+    public void setCandidates(List<Biker> candidates) {
         this.candidates = candidates;
     }
 
-    public List<Pilot> getPilots() {
+    public List<Biker> getPilots() {
         return pilots;
     }
 
-    public void setPilots(List<Pilot> pilots) {
+    public void setPilots(List<Biker> pilots) {
         this.pilots = pilots;
     }
 

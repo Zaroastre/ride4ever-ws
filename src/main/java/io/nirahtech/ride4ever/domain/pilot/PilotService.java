@@ -8,12 +8,17 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import io.nirahtech.ride4ever.core.environment.Pilot;
+import org.springframework.stereotype.Service;
+
+import io.nirahtech.ride4ever.core.environment.Motorbike;
+import io.nirahtech.ride4ever.core.environment.Biker;
+import io.nirahtech.ride4ever.domain.motorbike.MotorbikeService;
 import io.nirahtech.ride4ever.infrastructure.exceptions.DuplicateConstraintException;
 
+@Service
 public final class PilotService implements PilotApi {
 
-    private static final Map<Integer, Pilot> DATABASE = new HashMap<>();
+    private static final Map<Integer, Biker> DATABASE = new HashMap<>();
 
     private static final PilotService SINGLETON = new PilotService();
 
@@ -26,16 +31,19 @@ public final class PilotService implements PilotApi {
     }
 
     @Override
-    public Pilot create(Pilot entity) {
-        System.out.println(entity);
-        Collection<Pilot> registeredPilots = DATABASE.values();
-        for (Pilot pilot : registeredPilots) {
+    public Biker create(Biker entity) {
+        Collection<Biker> registeredPilots = DATABASE.values();
+        for (Biker pilot : registeredPilots) {
             if (pilot.getEmail().equalsIgnoreCase(entity.getEmail())) {
                 throw new DuplicateConstraintException("Email " + pilot.getEmail() + " is not available.");
             }
             if (pilot.getPhoneNumber().equalsIgnoreCase(entity.getPhoneNumber())) {
                 throw new DuplicateConstraintException("Phone number " + pilot.getPhoneNumber() + " is not available.");
             }
+        }
+        final MotorbikeService motorbikeService = MotorbikeService.getInstance();
+        for (Motorbike motorbike :entity.getMotorbikes()) {
+            motorbikeService.create(motorbike);
         }
         Set<Integer> identifiers = DATABASE.keySet();
         int maxIdentifier = 0;
@@ -46,12 +54,13 @@ public final class PilotService implements PilotApi {
         }
         maxIdentifier += 1;
         entity.setIdentifier(maxIdentifier);
+
         DATABASE.put(maxIdentifier, entity);
         return entity;
     }
 
     @Override
-    public Pilot read(Integer identifier) {
+    public Biker read(Integer identifier) {
         if (DATABASE.containsKey(identifier)) {
             return DATABASE.get(identifier);
         }
@@ -59,7 +68,7 @@ public final class PilotService implements PilotApi {
     }
 
     @Override
-    public Pilot update(Integer identifier, Pilot entity) {
+    public Biker update(Integer identifier, Biker entity) {
         if (DATABASE.containsKey(identifier)) {
             return DATABASE.replace(identifier, entity);
         }
@@ -68,7 +77,7 @@ public final class PilotService implements PilotApi {
     }
 
     @Override
-    public Pilot delete(Integer identifier) {
+    public Biker delete(Integer identifier) {
         if (DATABASE.containsKey(identifier)) {
             return DATABASE.remove(identifier);
         }
@@ -76,18 +85,14 @@ public final class PilotService implements PilotApi {
     }
 
     @Override
-    public List<Pilot> findAll() {
+    public List<Biker> findAll() {
         return new ArrayList<>(DATABASE.values());
     }
 
     @Override
-    public Pilot findByEmail(final String email) {
-        Pilot pilot = null;
-        System.out.println(email);
-        System.out.println(DATABASE.size());
-        System.out.println(DATABASE);
-        Optional<Pilot> result = DATABASE.values().stream().filter(entity -> entity.getEmail().equalsIgnoreCase(email)).findFirst();
-        System.out.println(result.isPresent());
+    public Biker findByEmail(final String email) {
+        Biker pilot = null;
+        Optional<Biker> result = DATABASE.values().stream().filter(entity -> entity.getEmail().equalsIgnoreCase(email)).findFirst();
         if (result.isPresent()) {
             pilot = result.get();
         }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import io.nirahtech.ride4ever.core.environment.Pilot;
+import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.core.web.exceptions.NotYetImplementedException;
 import io.nirahtech.ride4ever.domain.registration.RegistrationService;
 
@@ -18,7 +18,7 @@ public final class RecoveryService implements RecoveryApi {
 
     @Override
     public Recovery findAccountByEmail(String email) throws RuntimeException {
-        Pilot pilotAccount = this.service.find(email);
+        Biker pilotAccount = this.service.find(email);
         if (pilotAccount != null) {
             final UUID token = UUID.randomUUID();
             final Recovery recovery = new Recovery();

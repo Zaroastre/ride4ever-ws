@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.nirahtech.ride4ever.core.environment.Pilot;
+import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.domain.pilot.PilotService;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
@@ -26,7 +26,7 @@ public final class AuthenticationService implements AuthenticationApi {
     @Override
     public Session login(Credential credential) throws RuntimeException {
         String jwt = null;
-        Pilot pilot = PILOT_SERVICE.findByEmail(credential.getUsername());
+        Biker pilot = PILOT_SERVICE.findByEmail(credential.getUsername());
         Session session = null;
         if (pilot != null) {
             if (pilot.getPassword().equals(credential.getPassword())) {
@@ -44,7 +44,7 @@ public final class AuthenticationService implements AuthenticationApi {
                     e.printStackTrace();
                     throw new InternalProcessException(e.getMessage());
                 }
-                session = new Session(jwt, new Pilot());
+                session = new Session(jwt, pilot);
                 if (jwt != null) {
                     if (sessions.keySet().contains(credential)) {
                         sessions.replace(credential, sessions.get(credential), session);

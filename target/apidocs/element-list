@@ -1,0 +1,13 @@
+io.nirahtech.ride4ever
+io.nirahtech.ride4ever.application.dialect
+io.nirahtech.ride4ever.application.runtime
+io.nirahtech.ride4ever.application.scheduler
+io.nirahtech.ride4ever.core.environment
+io.nirahtech.ride4ever.core.web.exceptions
+io.nirahtech.ride4ever.domain.authentication
+io.nirahtech.ride4ever.domain.motorbike
+io.nirahtech.ride4ever.domain.pilot
+io.nirahtech.ride4ever.domain.recovery
+io.nirahtech.ride4ever.domain.registration
+io.nirahtech.ride4ever.infrastructure.api
+io.nirahtech.ride4ever.infrastructure.exceptions

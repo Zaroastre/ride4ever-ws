@@ -1,10 +1,10 @@
 package io.nirahtech.ride4ever.domain.registration;
 
-import io.nirahtech.ride4ever.core.environment.Pilot;
+import io.nirahtech.ride4ever.core.environment.Biker;
 
 interface RegistrationApi {
-    Pilot create(final Pilot pilot) throws RuntimeException;
-    Pilot find(final String email) throws RuntimeException;
-    Pilot update(final Pilot pilot) throws RuntimeException;
-    Pilot delete(final Pilot pilot) throws RuntimeException;
+    Biker create(final Biker pilot) throws RuntimeException;
+    Biker find(final String email) throws RuntimeException;
+    Biker update(final Biker pilot) throws RuntimeException;
+    Biker delete(final Biker pilot) throws RuntimeException;
 }
