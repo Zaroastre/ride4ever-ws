@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.nirahtech.ride4ever.core.environment.Motorbike;
+import io.nirahtech.ride4ever.core.environment.MotorbikeType;
 
 @CrossOrigin("*")
 @RequestMapping("/motorbikes")
@@ -55,5 +56,10 @@ public final class MotorbikeController implements MotorbikeApi {
     public Motorbike findByLicensePlate(String licensePlate) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @GetMapping("/types")
+    public MotorbikeType[] getMotorbikesTypes() {
+        return MotorbikeType.values();
     }
 }
