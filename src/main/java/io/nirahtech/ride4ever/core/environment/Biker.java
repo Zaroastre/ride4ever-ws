@@ -43,7 +43,7 @@ public final class Biker implements Serializable {
     private String picture;
 
     private String work;
-    
+
     private boolean canRepairMotorbike;
     private boolean isTrainedForFirstRescue;
 

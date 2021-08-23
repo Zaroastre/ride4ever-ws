@@ -5,22 +5,40 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-public class Trip implements Serializable {
+@Entity
+public class RoadTrip implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int identifier;
 
     @Column(nullable = false)
     private String title;
     private String description = null;
-    
+
     @Column(nullable = false)
     private Biker organizer;
     private int maxPilots = 0;
 
-    private List<Biker> candidates;
 
-    private List<Biker> pilots;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<Biker> candidates = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<Biker> pilots = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
     private RoadTripType roadTripType;
 
     @Column(nullable = false)
@@ -30,8 +48,9 @@ public class Trip implements Serializable {
     @Column(nullable = false)
     private Place startPlace = null;
 
-    private List<Place> places = new ArrayList<>();
-    
+    // @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    // private List<Place> places = new ArrayList<>();
+
     @Column(nullable = false)
     private Place stopPlace = null;
 
@@ -117,13 +136,13 @@ public class Trip implements Serializable {
         this.startPlace = startPlace;
     }
 
-    public List<Place> getPlaces() {
-        return places;
-    }
+    // public List<Place> getPlaces() {
+    //     return places;
+    // }
 
-    public void setPlaces(List<Place> places) {
-        this.places = places;
-    }
+    // public void setPlaces(List<Place> places) {
+    //     this.places = places;
+    // }
 
     public Place getStopPlace() {
         return stopPlace;
@@ -141,6 +160,11 @@ public class Trip implements Serializable {
         this.kilometersAverage = kilometersAverage;
     }
 
-    
+    public int getIdentifier() {
+        return identifier;
+    }
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
 
 }
