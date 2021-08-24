@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.domain.roadtrip;
+package io.nirahtech.ride4ever.domain.biker;
 
 import java.util.List;
 
@@ -12,50 +12,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.nirahtech.ride4ever.core.environment.RoadTrip;
-import io.nirahtech.ride4ever.core.environment.RoadTripType;
+import io.nirahtech.ride4ever.core.environment.Biker;
 
 @CrossOrigin("*")
-@RequestMapping("/roadtrips")
+@RequestMapping("/bikers")
 @RestController
-public final class RoadTripController implements RoadTripApi {
+public final class BikerController implements BikerApi {
 
-    private final RoadTripService service = RoadTripService.getInstance();
+    private final BikerService service = BikerService.getInstance();
 
     @PostMapping
     @Override
-    public RoadTrip create(@RequestBody RoadTrip entity) {
-        System.out.println(entity);
+    public Biker create(@RequestBody Biker entity) {
         return this.service.create(entity);
     }
 
     @GetMapping("/{identifier}")
     @Override
-    public RoadTrip read(@PathVariable Integer identifier) {
+    public Biker read(@PathVariable Integer identifier) {
         return this.service.read(identifier);
     }
 
     @PutMapping("/{identifier}")
     @Override
-    public RoadTrip update(@PathVariable Integer identifier, @RequestBody RoadTrip entity) {
+    public Biker update(@PathVariable Integer identifier, @RequestBody Biker entity) {
         return this.service.update(identifier, entity);
     }
 
     @DeleteMapping("/{identifier}")
     @Override
-    public RoadTrip delete(@PathVariable Integer identifier) {
+    public Biker delete(@PathVariable Integer identifier) {
         return this.service.delete(identifier);
     }
 
     @GetMapping
     @Override
-    public List<RoadTrip> findAll() {
+    public List<Biker> findAll() {
         return this.service.findAll();
     }
 
-    @GetMapping("/types")
-    public RoadTripType[] getRoadTripsTypes() {
-        return RoadTripType.values();
+    @Override
+    public Biker findByEmail(String email) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

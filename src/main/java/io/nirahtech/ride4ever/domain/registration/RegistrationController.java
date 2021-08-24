@@ -31,7 +31,7 @@ public final class RegistrationController implements RegistrationApi {
     }
 
     @Override
-    public Biker update(@RequestBody final Biker pilot) throws RuntimeException {
+    public Biker update(@RequestBody final Biker biker) throws RuntimeException {
         throw new MethodNotAllowedException();
     }
 

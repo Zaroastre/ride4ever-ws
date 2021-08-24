@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Place implements Serializable {
+public class Address implements Serializable {
 
     
     @Id
@@ -22,6 +22,7 @@ public class Place implements Serializable {
     
     private int number;
     private String street;
+    private String state;
     private int zipCode;
     private String city;
     
@@ -32,11 +33,11 @@ public class Place implements Serializable {
     @JoinColumn
     private Weather weather;
 
-    public Place() {
+    public Address() {
 
     }
 
-    public Place(final int number, final String street, final int zipCode, final String city, final Country country) {
+    public Address(final int number, final String street, final int zipCode, final String city, final Country country) {
 
     }
 
@@ -93,6 +94,13 @@ public class Place implements Serializable {
     }
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
+    }
+
+    public String getState() {
+        return state;
+    }
+    public void setState(String state) {
+        this.state = state;
     }
 
 }

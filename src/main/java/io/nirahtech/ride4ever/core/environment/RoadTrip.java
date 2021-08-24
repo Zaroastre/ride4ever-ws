@@ -29,14 +29,13 @@ public class RoadTrip implements Serializable {
 
     @Column(nullable = false)
     private Biker organizer;
-    private int maxPilots = 0;
+    private int maxBikers = 0;
 
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
     private List<Biker> candidates = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Biker> pilots = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
+    private List<Biker> bikers = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private RoadTripType roadTripType;
@@ -46,13 +45,13 @@ public class RoadTrip implements Serializable {
     private Timestamp endDate;
 
     @Column(nullable = false)
-    private Place startPlace = null;
+    private Address startAddress = null;
 
-    // @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
-    // private List<Place> places = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
+    private List<Address> destinations = new ArrayList<>();
 
     @Column(nullable = false)
-    private Place stopPlace = null;
+    private Address stopAddress = null;
 
     private int kilometersAverage;
 
@@ -80,14 +79,13 @@ public class RoadTrip implements Serializable {
         this.organizer = organizer;
     }
 
-    public int getMaxPilots() {
-        return maxPilots;
+    public int getMaxBikers() {
+        return maxBikers;
     }
-
-    public void setMaxPilots(int maxPilots) {
-        this.maxPilots = maxPilots;
+    public void setMaxBikers(int maxBikers) {
+        this.maxBikers = maxBikers;
     }
-
+    
     public List<Biker> getCandidates() {
         return candidates;
     }
@@ -96,12 +94,11 @@ public class RoadTrip implements Serializable {
         this.candidates = candidates;
     }
 
-    public List<Biker> getPilots() {
-        return pilots;
+    public List<Biker> getBikers() {
+        return bikers;
     }
-
-    public void setPilots(List<Biker> pilots) {
-        this.pilots = pilots;
+    public void setBikers(List<Biker> bikers) {
+        this.bikers = bikers;
     }
 
     public RoadTripType getRoadTripType() {
@@ -128,30 +125,6 @@ public class RoadTrip implements Serializable {
         this.endDate = endDate;
     }
 
-    public Place getStartPlace() {
-        return startPlace;
-    }
-
-    public void setStartPlace(Place startPlace) {
-        this.startPlace = startPlace;
-    }
-
-    // public List<Place> getPlaces() {
-    //     return places;
-    // }
-
-    // public void setPlaces(List<Place> places) {
-    //     this.places = places;
-    // }
-
-    public Place getStopPlace() {
-        return stopPlace;
-    }
-
-    public void setStopPlace(Place stopPlace) {
-        this.stopPlace = stopPlace;
-    }
-
     public int getKilometersAverage() {
         return kilometersAverage;
     }
@@ -166,5 +139,23 @@ public class RoadTrip implements Serializable {
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
     }
-
+    public List<Address> getDestinations() {
+        return destinations;
+    }
+    public Address getStartAddress() {
+        return startAddress;
+    }
+    public Address getStopAddress() {
+        return stopAddress;
+    }
+    public void setDestinations(List<Address> destinations) {
+        this.destinations = destinations;
+    }
+    public void setStartAddress(Address startAddress) {
+        this.startAddress = startAddress;
+    }
+    public void setStopAddress(Address stopAddress) {
+        this.stopAddress = stopAddress;
+    }
+    
 }

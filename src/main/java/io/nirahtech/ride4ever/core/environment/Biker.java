@@ -42,6 +42,8 @@ public final class Biker implements Serializable {
 
     private String picture;
 
+    private Address address;
+
     private String work;
 
     private boolean canRepairMotorbike;
@@ -54,9 +56,8 @@ public final class Biker implements Serializable {
     private boolean hadHaveOperations;
     private String allergies;
 
-    private Place place;
-
     private int level;
+    // private int reputation;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Motorbike> motorbikes = new ArrayList<>();
@@ -244,10 +245,11 @@ public final class Biker implements Serializable {
     public boolean getHadAllreadyRideWithPassenger() {
         return hadAllreadyRideWithPassenger;
     }
-    public Place getPlace() {
-        return place;
+
+    public Address getAddress() {
+        return address;
     }
-    public void setPlace(Place place) {
-        this.place = place;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -18,8 +18,8 @@ public final class RecoveryService implements RecoveryApi {
 
     @Override
     public Recovery findAccountByEmail(String email) throws RuntimeException {
-        Biker pilotAccount = this.service.find(email);
-        if (pilotAccount != null) {
+        Biker bikerAccount = this.service.find(email);
+        if (bikerAccount != null) {
             final UUID token = UUID.randomUUID();
             final Recovery recovery = new Recovery();
             recovery.setIdentity(email);

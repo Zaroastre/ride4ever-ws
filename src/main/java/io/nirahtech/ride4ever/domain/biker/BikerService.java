@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.domain.pilot;
+package io.nirahtech.ride4ever.domain.biker;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,29 +16,29 @@ import io.nirahtech.ride4ever.domain.motorbike.MotorbikeService;
 import io.nirahtech.ride4ever.infrastructure.exceptions.DuplicateConstraintException;
 
 @Service
-public final class PilotService implements PilotApi {
+public final class BikerService implements BikerApi {
 
     private static final Map<Integer, Biker> DATABASE = new HashMap<>();
 
-    private static final PilotService SINGLETON = new PilotService();
+    private static final BikerService SINGLETON = new BikerService();
 
-    private PilotService() {
+    private BikerService() {
 
     }
 
-    public static PilotService getInstance() {
+    public static BikerService getInstance() {
         return SINGLETON;
     }
 
     @Override
     public Biker create(Biker entity) {
-        Collection<Biker> registeredPilots = DATABASE.values();
-        for (Biker pilot : registeredPilots) {
-            if (pilot.getEmail().equalsIgnoreCase(entity.getEmail())) {
-                throw new DuplicateConstraintException("Email " + pilot.getEmail() + " is not available.");
+        Collection<Biker> registeredBikers = DATABASE.values();
+        for (Biker biker : registeredBikers) {
+            if (biker.getEmail().equalsIgnoreCase(entity.getEmail())) {
+                throw new DuplicateConstraintException("Email " + biker.getEmail() + " is not available.");
             }
-            if (pilot.getPhoneNumber().equalsIgnoreCase(entity.getPhoneNumber())) {
-                throw new DuplicateConstraintException("Phone number " + pilot.getPhoneNumber() + " is not available.");
+            if (biker.getPhoneNumber().equalsIgnoreCase(entity.getPhoneNumber())) {
+                throw new DuplicateConstraintException("Phone number " + biker.getPhoneNumber() + " is not available.");
             }
         }
         final MotorbikeService motorbikeService = MotorbikeService.getInstance();
@@ -91,12 +91,12 @@ public final class PilotService implements PilotApi {
 
     @Override
     public Biker findByEmail(final String email) {
-        Biker pilot = null;
+        Biker biker = null;
         Optional<Biker> result = DATABASE.values().stream().filter(entity -> entity.getEmail().equalsIgnoreCase(email)).findFirst();
         if (result.isPresent()) {
-            pilot = result.get();
+            biker = result.get();
         }
-        return pilot;
+        return biker;
     }
 
 }

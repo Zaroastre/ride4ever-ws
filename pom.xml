@@ -60,7 +60,6 @@
         <hibernate.version>5.5.0.Final</hibernate.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
-    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -447,8 +446,4 @@
         </plugin>
     </plugins>
 </build>
-<modules>
-    <module>rider4ever-core</module>
-    <module>rider4ever-authentication</module>
-</modules>
 </project>

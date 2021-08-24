@@ -11,7 +11,7 @@ import java.util.UUID;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.nirahtech.ride4ever.core.environment.Biker;
-import io.nirahtech.ride4ever.domain.pilot.PilotService;
+import io.nirahtech.ride4ever.domain.biker.BikerService;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
@@ -20,16 +20,16 @@ public final class AuthenticationService implements AuthenticationApi {
 
     private static final UUID KEY = UUID.randomUUID();
 
-    private static final PilotService PILOT_SERVICE = PilotService.getInstance();
+    private static final BikerService PILOT_SERVICE = BikerService.getInstance();
     private Map<Credential, Session> sessions = new HashMap<>();
 
     @Override
     public Session login(Credential credential) throws RuntimeException {
         String jwt = null;
-        Biker pilot = PILOT_SERVICE.findByEmail(credential.getUsername());
+        Biker biker = PILOT_SERVICE.findByEmail(credential.getUsername());
         Session session = null;
-        if (pilot != null) {
-            if (pilot.getPassword().equals(credential.getPassword())) {
+        if (biker != null) {
+            if (biker.getPassword().equals(credential.getPassword())) {
                 try {
                     jwt = Jwts.builder()
                         .claim("email", credential.getUsername())
@@ -44,7 +44,7 @@ public final class AuthenticationService implements AuthenticationApi {
                     e.printStackTrace();
                     throw new InternalProcessException(e.getMessage());
                 }
-                session = new Session(jwt, pilot);
+                session = new Session(jwt, biker);
                 if (jwt != null) {
                     if (sessions.keySet().contains(credential)) {
                         sessions.replace(credential, sessions.get(credential), session);
@@ -56,7 +56,7 @@ public final class AuthenticationService implements AuthenticationApi {
                 throw new BadRequestException("Invalid password.");
             }
         } else {
-            throw new ResourceNotFoundException("Pilot using email "+ credential.getUsername() + " is not found.");
+            throw new ResourceNotFoundException("Biker using email "+ credential.getUsername() + " is not found.");
         }
         return session;
     }

@@ -21,8 +21,8 @@ import io.nirahtech.ride4ever.core.environment.Country;
 import io.nirahtech.ride4ever.core.environment.Gender;
 import io.nirahtech.ride4ever.core.environment.Motorbike;
 import io.nirahtech.ride4ever.core.environment.MotorbikeType;
-import io.nirahtech.ride4ever.core.environment.Place;
-import io.nirahtech.ride4ever.domain.pilot.PilotService;
+import io.nirahtech.ride4ever.core.environment.Address;
+import io.nirahtech.ride4ever.domain.biker.BikerService;
 
 /**
  * Class that represents the entry point of the application.
@@ -60,37 +60,37 @@ public class NirahRide4EverApplication {
         cbf600.setType(MotorbikeType.ROADSTER);
         cbf600.setMileage(23000);
 
-        final Place place = new Place();
+        final Address place = new Address();
         place.setCity("Le Grès");
         place.setCountry(Country.FRANCE);
         place.setNumber(40);
         place.setStreet("Route de Pelleport");
         place.setZipCode(31480);
 
-        final Biker pilot = new Biker();
-        pilot.setFirstName("Nicolas");
-        pilot.setLastName("METIVIER");
-        pilot.setBirthDate(Timestamp.valueOf("1993-01-06 07:00:00"));
-        pilot.setDriverLicenceDate(Timestamp.valueOf("2020-06-26 07:00:00"));
-        pilot.setRegistrationDate(Timestamp.valueOf("2021-08-12 07:00:00"));
-        pilot.setBlood(Blood.O_PLUS);
-        pilot.setGender(Gender.MALE.name());
-        pilot.setEmail("nicolas.a.metivier@gmail.com");
-        pilot.setPhoneNumber("06.23.33.57.03");
-        pilot.setBiography("Je suis passioné.");
-        pilot.setCanRepairMotorbike(false);
-        pilot.setHadHaveOperations(true);
-        pilot.setWork("Software Engineer");
-        pilot.setPassword("R|d43vR");
-        pilot.setPseudo("Jxalo");
-        pilot.setPlace(place);
+        final Biker biker = new Biker();
+        biker.setFirstName("Nicolas");
+        biker.setLastName("METIVIER");
+        biker.setBirthDate(Timestamp.valueOf("1993-01-06 07:00:00"));
+        biker.setDriverLicenceDate(Timestamp.valueOf("2020-06-26 07:00:00"));
+        biker.setRegistrationDate(Timestamp.valueOf("2021-08-12 07:00:00"));
+        biker.setBlood(Blood.O_PLUS);
+        biker.setGender(Gender.MALE.name());
+        biker.setEmail("nicolas.a.metivier@gmail.com");
+        biker.setPhoneNumber("06.23.33.57.03");
+        biker.setBiography("Je suis passioné.");
+        biker.setCanRepairMotorbike(false);
+        biker.setHadHaveOperations(true);
+        biker.setWork("Software Engineer");
+        biker.setPassword("R|d43vR");
+        biker.setPseudo("Jxalo");
+        biker.setAddress(place);
 
-        pilot.getMotorbikes().add(cbf125);
-        pilot.getMotorbikes().add(cbf600);
+        biker.getMotorbikes().add(cbf125);
+        biker.getMotorbikes().add(cbf600);
 
-        final PilotService service = PilotService.getInstance();
+        final BikerService service = BikerService.getInstance();
         try {
-            service.create(pilot);
+            service.create(biker);
         } catch (Exception e) {
             //TODO: handle exception
         }
