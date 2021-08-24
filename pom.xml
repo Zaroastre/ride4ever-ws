@@ -49,7 +49,7 @@
         </developer>
     </developers>
     <properties>
-        <start-class>io.nirahtech.ride4ever.AirStapApiApplication</start-class>
+        <start-class>io.nirahtech.ride4ever.NirahRide4EverApplication</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>14</java.version>
@@ -343,7 +343,7 @@
                     <manifest>
 
                     <!-- give full qualified name of your main class-->
-                      <mainClass>io.nirahtech.ride4ever.NirahRide4EverApplication</mainClass>
+                      <mainClass>${start-class}</mainClass>
 
                     </manifest>
                   </archive>
