@@ -2,6 +2,7 @@ package io.nirahtech.ride4ever.domain.motorbike;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,8 @@ import io.nirahtech.ride4ever.core.environment.MotorbikeType;
 @RestController
 public final class MotorbikeController implements MotorbikeApi {
     
-    private final MotorbikeService service = MotorbikeService.getInstance();
+    @Autowired
+    private MotorbikeService service;
 
     @PostMapping
     @Override
@@ -54,8 +56,7 @@ public final class MotorbikeController implements MotorbikeApi {
 
     @Override
     public Motorbike findByLicensePlate(String licensePlate) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.service.findByLicensePlate(licensePlate);
     }
 
     @GetMapping("/types")

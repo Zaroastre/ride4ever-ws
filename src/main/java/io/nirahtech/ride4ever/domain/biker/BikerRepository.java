@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import io.nirahtech.ride4ever.core.environment.Biker;
 
-@Repository
+@Repository("bikerRepository")
 public interface BikerRepository extends JpaRepository<Biker, Integer> {
-    
+    Biker findByEmail(final String email);    
 }

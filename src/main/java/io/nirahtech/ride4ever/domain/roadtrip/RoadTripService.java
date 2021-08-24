@@ -1,21 +1,23 @@
 package io.nirahtech.ride4ever.domain.roadtrip;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import io.nirahtech.ride4ever.core.environment.RoadTrip;
 
+@Component("roadTripService")
 public final class RoadTripService implements RoadTripApi {
-    private static final Map<Integer, RoadTrip> DATABASE = new HashMap<>();
+
+    @Autowired
+    private RoadTripRepository repository;
 
     private static final RoadTripService SINGLETON = new RoadTripService();
 
-    private RoadTripService() {
-
-    }
+    private RoadTripService() { }
 
     public static RoadTripService getInstance() {
         return SINGLETON;
@@ -23,47 +25,39 @@ public final class RoadTripService implements RoadTripApi {
 
     @Override
     public RoadTrip create(RoadTrip entity) {
-        Set<Integer> identifiers = DATABASE.keySet();
-        int maxIdentifier = 0;
-        for (Integer identifier : identifiers) {
-            if (identifier > maxIdentifier) {
-                maxIdentifier = identifier;
-            }
-        }
-        maxIdentifier += 1;
-        entity.setIdentifier(maxIdentifier);
-        DATABASE.put(maxIdentifier, entity);
-        return entity;
+        return this.repository.save(entity);
     }
 
     @Override
     public RoadTrip read(Integer identifier) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.get(identifier);
+        Optional<RoadTrip> entity = this.repository.findById(identifier);
+        if (entity.isPresent()) {
+            return entity.get();
         }
         return null;
     }
 
     @Override
     public RoadTrip update(Integer identifier, RoadTrip entity) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.replace(identifier, entity);
-        }
-        return null;
-
+        return this.repository.save(entity);
     }
 
     @Override
     public RoadTrip delete(Integer identifier) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.remove(identifier);
+        RoadTrip entity = this.read(identifier);
+        if (entity != null) {
+            this.repository.deleteById(entity.getIdentifier());
         }
-        return null;
+        return entity;
     }
 
     @Override
     public List<RoadTrip> findAll() {
-        return new ArrayList<>(DATABASE.values());
+        List<RoadTrip> list = new ArrayList<>();
+        this.repository.findAll().forEach((item) -> {
+            list.add(item);
+        });
+        return list;
     }
 
 }

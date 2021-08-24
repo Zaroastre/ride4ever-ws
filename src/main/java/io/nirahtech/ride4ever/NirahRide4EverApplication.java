@@ -1,9 +1,11 @@
 package io.nirahtech.ride4ever;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import javax.sql.DataSource;
 
+import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.nirahtech.ride4ever.application.runtime.ApplicationShutdownHook;
 import io.nirahtech.ride4ever.application.runtime.ApplicationUncaughtExceptionHandler;
+import io.nirahtech.ride4ever.core.environment.Address;
 import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.core.environment.Blood;
 import io.nirahtech.ride4ever.core.environment.Brand;
@@ -21,7 +24,6 @@ import io.nirahtech.ride4ever.core.environment.Country;
 import io.nirahtech.ride4ever.core.environment.Gender;
 import io.nirahtech.ride4ever.core.environment.Motorbike;
 import io.nirahtech.ride4ever.core.environment.MotorbikeType;
-import io.nirahtech.ride4ever.core.environment.Address;
 import io.nirahtech.ride4ever.domain.biker.BikerService;
 
 /**
@@ -134,6 +136,11 @@ public class NirahRide4EverApplication {
                 registry.addMapping("/*").allowedOrigins("*");
             }
         };
+    }
+
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    public Server h2Server() throws SQLException {
+        return Server.createTcpServer("-tcp", "-ifNotExists", "-tcpAllowOthers", "-tcpPort", "8084");
     }
 
 }

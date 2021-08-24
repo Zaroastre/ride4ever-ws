@@ -1,21 +1,23 @@
 package io.nirahtech.ride4ever.domain.address;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import io.nirahtech.ride4ever.core.environment.Address;
 
+@Component("addressService")
 public final class AddressService implements AddressApi {
-    private static final Map<Integer, Address> DATABASE = new HashMap<>();
+
+    @Autowired
+    private AddressRepository repository;
 
     private static final AddressService SINGLETON = new AddressService();
 
-    private AddressService() {
-
-    }
+    private AddressService() { }
 
     public static AddressService getInstance() {
         return SINGLETON;
@@ -23,47 +25,39 @@ public final class AddressService implements AddressApi {
 
     @Override
     public Address create(Address entity) {
-        Set<Integer> identifiers = DATABASE.keySet();
-        int maxIdentifier = 0;
-        for (Integer identifier : identifiers) {
-            if (identifier > maxIdentifier) {
-                maxIdentifier = identifier;
-            }
-        }
-        maxIdentifier += 1;
-        entity.setIdentifier(maxIdentifier);
-        DATABASE.put(maxIdentifier, entity);
-        return entity;
+        return this.repository.save(entity);
     }
 
     @Override
     public Address read(Integer identifier) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.get(identifier);
+        Optional<Address> entity = this.repository.findById(identifier);
+        if (entity.isPresent()) {
+            return entity.get();
         }
         return null;
     }
 
     @Override
     public Address update(Integer identifier, Address entity) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.replace(identifier, entity);
-        }
-        return null;
-
+        return this.repository.save(entity);
     }
 
     @Override
     public Address delete(Integer identifier) {
-        if (DATABASE.containsKey(identifier)) {
-            return DATABASE.remove(identifier);
+        Address entity = this.read(identifier);
+        if (entity != null) {
+            this.repository.deleteById(entity.getIdentifier());
         }
-        return null;
+        return entity;
     }
 
     @Override
     public List<Address> findAll() {
-        return new ArrayList<>(DATABASE.values());
+        List<Address> list = new ArrayList<>();
+        this.repository.findAll().forEach((item) -> {
+            list.add(item);
+        });
+        return list;
     }
 
 }

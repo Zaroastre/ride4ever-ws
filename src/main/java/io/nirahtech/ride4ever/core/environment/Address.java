@@ -25,7 +25,6 @@ public class Address implements Serializable {
     private String state;
     private int zipCode;
     private String city;
-    
     @Enumerated(EnumType.STRING)
     private Country country;
     

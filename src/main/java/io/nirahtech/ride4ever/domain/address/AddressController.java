@@ -2,6 +2,7 @@ package io.nirahtech.ride4ever.domain.address;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ import io.nirahtech.ride4ever.core.environment.Address;
 @RestController
 public final class AddressController implements AddressApi {
 
-    private final AddressService service = AddressService.getInstance();
+    @Autowired
+    private AddressService service;
 
     @PostMapping
     @Override

@@ -2,6 +2,7 @@ package io.nirahtech.ride4ever.domain.roadtrip;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,8 @@ import io.nirahtech.ride4ever.core.environment.RoadTripType;
 @RestController
 public final class RoadTripController implements RoadTripApi {
 
-    private final RoadTripService service = RoadTripService.getInstance();
+    @Autowired
+    private RoadTripService service;
 
     @PostMapping
     @Override

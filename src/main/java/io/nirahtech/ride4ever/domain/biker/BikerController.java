@@ -2,6 +2,7 @@ package io.nirahtech.ride4ever.domain.biker;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,8 @@ import io.nirahtech.ride4ever.core.environment.Biker;
 @RestController
 public final class BikerController implements BikerApi {
 
-    private final BikerService service = BikerService.getInstance();
+    @Autowired
+    private BikerService service;
 
     @PostMapping
     @Override
@@ -53,8 +55,7 @@ public final class BikerController implements BikerApi {
 
     @Override
     public Biker findByEmail(String email) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.service.findByEmail(email);
     }
 
 }
