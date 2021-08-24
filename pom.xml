@@ -329,7 +329,9 @@
             </includes>
         </resource>
     </resources>
-     <plugin> 
+     
+    <plugins>
+    <plugin> 
 
                 <!-- Building an executable jar -->
 
@@ -347,7 +349,6 @@
                   </archive>
                 </configuration>
     </plugin>
-    <plugins>
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>

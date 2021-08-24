@@ -1,4 +1,0 @@
-2021-08-24 23:32:05 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ROADTRIP" non trouvée
-Table "ROADTRIP" not found; SQL statement:
-select roadtrip0_.identifier as identifi1_4_, roadtrip0_.description as descript2_4_, roadtrip0_.endDate as enddate3_4_, roadtrip0_.kilometersAverage as kilomete4_4_, roadtrip0_.maxBikers as maxbiker5_4_, roadtrip0_.organizer as organize6_4_, roadtrip0_.roadTripType as roadtrip7_4_, roadtrip0_.startAddress as startadd8_4_, roadtrip0_.startDate as startdat9_4_, roadtrip0_.stopAddress as stopadd10_4_, roadtrip0_.title as title11_4_ from RoadTrip roadtrip0_ [42102-200]
