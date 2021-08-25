@@ -14,8 +14,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import io.nirahtech.ride4ever.application.runtime.ApplicationShutdownHook;
-import io.nirahtech.ride4ever.application.runtime.ApplicationUncaughtExceptionHandler;
 import io.nirahtech.ride4ever.core.environment.Address;
 import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.core.environment.Blood;
@@ -24,7 +22,9 @@ import io.nirahtech.ride4ever.core.environment.Country;
 import io.nirahtech.ride4ever.core.environment.Gender;
 import io.nirahtech.ride4ever.core.environment.Motorbike;
 import io.nirahtech.ride4ever.core.environment.MotorbikeType;
-import io.nirahtech.ride4ever.domain.biker.BikerService;
+import io.nirahtech.ride4ever.engine.runtime.ApplicationShutdownHook;
+import io.nirahtech.ride4ever.engine.runtime.ApplicationUncaughtExceptionHandler;
+import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
 /**
  * Class that represents the entry point of the application.
