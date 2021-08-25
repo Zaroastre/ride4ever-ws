@@ -480,7 +480,7 @@
                     <includes>
                         <include>${project.build.directory}/${project.build.finalName}-exec.jar</include>
                     </includes>
-                    <jdkVersion>14</jdkVersion>
+                    <jdkVersion>${java.version}</jdkVersion>
                     <processTypes>
                         <web>java $JAVA_OPTS -jar ${project.build.directory}/${project.build.finalName}-exec.jar</web>
                     </processTypes>
