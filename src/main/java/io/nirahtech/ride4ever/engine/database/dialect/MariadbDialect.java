@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.engine.dialect;
+package io.nirahtech.ride4ever.engine.database.dialect;
 
 import org.hibernate.dialect.MySQL5Dialect;
 
