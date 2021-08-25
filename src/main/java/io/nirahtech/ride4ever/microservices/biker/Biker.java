@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 
 import io.nirahtech.ride4ever.microservices.address.Address;
 import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
+import io.nirahtech.ride4ever.microservices.roadtrip.RoadTrip;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber" }))
@@ -27,6 +28,7 @@ public final class Biker implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "biker_id")
     private int identifier;
     private String firstName;
     private String lastName;
@@ -39,6 +41,9 @@ public final class Biker implements Serializable {
     private String email;
     private String phoneNumber;
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizer")
+    private List<RoadTrip> roadTrips;
 
     @Column(length = 200)
     private String biography;

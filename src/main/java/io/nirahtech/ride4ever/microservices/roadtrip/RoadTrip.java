@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import io.nirahtech.ride4ever.microservices.address.Address;
@@ -24,13 +26,15 @@ public class RoadTrip implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "roadtrip_id")
     private int identifier;
 
     @Column(nullable = false)
     private String title;
     private String description = null;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "biker_id")
     private Biker organizer;
     private int maxBikers = 0;
 
@@ -53,13 +57,15 @@ public class RoadTrip implements Serializable {
     private Timestamp startDate;
     private Timestamp endDate;
 
-    @Column(nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="START_ADDRESS_ID", nullable=true, updatable=true)
     private Address startAddress = null;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
     private List<Address> destinations = new ArrayList<>();
 
-    @Column(nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="STOP_ADDRESS_ID", nullable=true, updatable=true)
     private Address stopAddress = null;
 
     private int kilometersAverage;
