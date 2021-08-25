@@ -470,6 +470,22 @@
                 </execution>
             </executions>
         </plugin>
+        <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.4</version>
+                <configuration>
+                    <appName>heroku-demo-stackabuse</appName>
+                    <includeTarget>false</includeTarget>
+                    <includes>
+                        <include>${project.build.directory}/${project.build.finalName}-exec.jar</include>
+                    </includes>
+                    <jdkVersion>14</jdkVersion>
+                    <processTypes>
+                        <web>java $JAVA_OPTS -jar ${project.build.directory}/${project.build.finalName}-exec.jar</web>
+                    </processTypes>
+                </configuration>
+            </plugin>
     </plugins>
 </build>
 </project>
