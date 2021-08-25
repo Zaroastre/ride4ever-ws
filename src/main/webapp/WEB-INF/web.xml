@@ -10,7 +10,7 @@
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>io.nirahtech.ride4ever.web.http.controller.rest.api</param-value>
+			<param-value>io.nirahtech.ride4ever.microservices</param-value>
 		</init-param>
 		<init-param>
 			<param-name>jersey.config.server.provider.classnames</param-name>

@@ -8,25 +8,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.nirahtech.ride4ever.core.environment.Biker;
-import io.nirahtech.ride4ever.microservices.biker.BikerService;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
+import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
+@Component("authenticationService")
 public final class AuthenticationService implements AuthenticationApi {
 
     private static final UUID KEY = UUID.randomUUID();
+    private static final Map<Credential, Session> SESSIONS = new HashMap<>();
 
-    private static final BikerService PILOT_SERVICE = BikerService.getInstance();
-    private Map<Credential, Session> sessions = new HashMap<>();
+    @Autowired
+    private BikerService service;
 
     @Override
     public Session login(Credential credential) throws RuntimeException {
         String jwt = null;
-        Biker biker = PILOT_SERVICE.findByEmail(credential.getUsername());
+        Biker biker = service.findByEmail(credential.getUsername());
         Session session = null;
         if (biker != null) {
             if (biker.getPassword().equals(credential.getPassword())) {
@@ -46,10 +51,10 @@ public final class AuthenticationService implements AuthenticationApi {
                 }
                 session = new Session(jwt, biker);
                 if (jwt != null) {
-                    if (sessions.keySet().contains(credential)) {
-                        sessions.replace(credential, sessions.get(credential), session);
+                    if (SESSIONS.keySet().contains(credential)) {
+                        SESSIONS.replace(credential, SESSIONS.get(credential), session);
                     } else {
-                        sessions.put(credential, session);
+                        SESSIONS.put(credential, session);
                     }
                 }
             } else {
