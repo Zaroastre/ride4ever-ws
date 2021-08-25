@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
 @Component("authenticationService")

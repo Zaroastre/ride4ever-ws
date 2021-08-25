@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.microservices.motorbike;
+package io.nirahtech.ride4ever.microservices.weather;
 
 import java.util.List;
 
@@ -14,50 +14,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("*")
-@RequestMapping("/motorbikes")
+@RequestMapping("/weathers")
 @RestController
-public final class MotorbikeController implements MotorbikeApi {
-    
+public final class WeatherController implements WeatherApi {
+
     @Autowired
-    private MotorbikeService service;
+    private WeatherService service;
 
     @PostMapping
     @Override
-    public Motorbike create(@RequestBody Motorbike entity) {
+    public Weather create(@RequestBody Weather entity) {
         return this.service.create(entity);
     }
 
     @GetMapping("/{identifier}")
     @Override
-    public Motorbike read(@PathVariable Integer identifier) {
+    public Weather read(@PathVariable Integer identifier) {
         return this.service.read(identifier);
     }
 
     @PutMapping("/{identifier}")
     @Override
-    public Motorbike update(@PathVariable Integer identifier, @RequestBody Motorbike entity) {
+    public Weather update(@PathVariable Integer identifier, @RequestBody Weather entity) {
         return this.service.update(identifier, entity);
     }
 
     @DeleteMapping("/{identifier}")
     @Override
-    public Motorbike delete(@PathVariable Integer identifier) {
+    public Weather delete(@PathVariable Integer identifier) {
         return this.service.delete(identifier);
     }
 
     @GetMapping
     @Override
-    public List<Motorbike> findAll() {
+    public List<Weather> findAll() {
         return this.service.findAll();
     }
 
-    @Override
-    public Motorbike findByLicensePlate(String licensePlate) {
-        return this.service.findByLicensePlate(licensePlate);
-    }
-
-    @GetMapping("/types")
-    public MotorbikeType[] getMotorbikesTypes() {
-        return MotorbikeType.values();
-    }
 }

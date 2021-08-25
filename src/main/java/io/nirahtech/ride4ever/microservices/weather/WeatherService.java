@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.microservices.address;
+package io.nirahtech.ride4ever.microservices.weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,20 +7,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("addressService")
-public final class AddressService implements AddressApi {
+@Component("weatherService")
+public final class WeatherService implements WeatherApi {
 
     @Autowired
-    private AddressRepository repository;
+    private WeatherRepository repository;
+
 
     @Override
-    public Address create(Address entity) {
+    public Weather create(Weather entity) {
         return this.repository.save(entity);
     }
 
     @Override
-    public Address read(Integer identifier) {
-        Optional<Address> entity = this.repository.findById(identifier);
+    public Weather read(Integer identifier) {
+        Optional<Weather> entity = this.repository.findById(identifier);
         if (entity.isPresent()) {
             return entity.get();
         }
@@ -28,13 +29,13 @@ public final class AddressService implements AddressApi {
     }
 
     @Override
-    public Address update(Integer identifier, Address entity) {
+    public Weather update(Integer identifier, Weather entity) {
         return this.repository.save(entity);
     }
 
     @Override
-    public Address delete(Integer identifier) {
-        Address entity = this.read(identifier);
+    public Weather delete(Integer identifier) {
+        Weather entity = this.read(identifier);
         if (entity != null) {
             this.repository.deleteById(entity.getIdentifier());
         }
@@ -42,8 +43,8 @@ public final class AddressService implements AddressApi {
     }
 
     @Override
-    public List<Address> findAll() {
-        List<Address> list = new ArrayList<>();
+    public List<Weather> findAll() {
+        List<Weather> list = new ArrayList<>();
         this.repository.findAll().forEach((item) -> {
             list.add(item);
         });

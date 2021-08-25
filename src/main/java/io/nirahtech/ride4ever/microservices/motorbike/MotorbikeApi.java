@@ -2,7 +2,6 @@ package io.nirahtech.ride4ever.microservices.motorbike;
 
 import java.util.List;
 
-import io.nirahtech.ride4ever.core.environment.Motorbike;
 import io.nirahtech.ride4ever.infrastructure.api.Crud;
 
 interface MotorbikeApi extends Crud<Integer,  Motorbike> {

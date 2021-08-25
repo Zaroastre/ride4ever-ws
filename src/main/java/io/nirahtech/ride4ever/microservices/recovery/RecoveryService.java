@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import io.nirahtech.ride4ever.core.environment.Biker;
-import io.nirahtech.ride4ever.core.web.exceptions.NotYetImplementedException;
+import org.hibernate.cfg.NotYetImplementedException;
+
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.registration.RegistrationService;
 
 final class RecoveryService implements RecoveryApi {

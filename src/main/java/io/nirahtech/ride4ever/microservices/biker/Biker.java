@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.core.environment;
+package io.nirahtech.ride4ever.microservices.biker;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import io.nirahtech.ride4ever.microservices.address.Address;
+import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber" }))

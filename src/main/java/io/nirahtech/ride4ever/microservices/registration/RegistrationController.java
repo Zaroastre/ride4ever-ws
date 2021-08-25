@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.nirahtech.ride4ever.core.environment.Biker;
-import io.nirahtech.ride4ever.core.web.exceptions.MethodNotAllowedException;
+import io.nirahtech.ride4ever.infrastructure.exceptions.NotImplementedException;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 
 @CrossOrigin("*")
 @RequestMapping("/registration")
@@ -30,12 +30,12 @@ public final class RegistrationController implements RegistrationApi {
 
     @Override
     public Biker find(String email) throws RuntimeException {
-        throw new MethodNotAllowedException();
+        throw new NotImplementedException();
     }
 
     @Override
     public Biker update(@RequestBody final Biker biker) throws RuntimeException {
-        throw new MethodNotAllowedException();
+        throw new NotImplementedException();
     }
 
     @DeleteMapping("/unregister")

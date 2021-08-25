@@ -7,8 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.nirahtech.ride4ever.core.environment.Motorbike;
-
 @Component("motorbikeService")
 public final class MotorbikeService implements MotorbikeApi {
     

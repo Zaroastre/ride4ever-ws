@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.core.environment;
+package io.nirahtech.ride4ever.microservices.address;
 
 import java.io.Serializable;
 
@@ -12,10 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Address implements Serializable {
+import io.nirahtech.ride4ever.microservices.weather.Weather;
 
-    
+@Entity
+public final class Address implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int identifier;

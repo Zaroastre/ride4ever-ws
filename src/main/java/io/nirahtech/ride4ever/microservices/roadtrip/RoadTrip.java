@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.core.environment;
+package io.nirahtech.ride4ever.microservices.roadtrip;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import io.nirahtech.ride4ever.microservices.address.Address;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
+
 @Entity
 public class RoadTrip implements Serializable {
 
@@ -31,6 +34,8 @@ public class RoadTrip implements Serializable {
     private Biker organizer;
     private int maxBikers = 0;
 
+
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
     private List<Biker> candidates = new ArrayList<>();
 
@@ -39,6 +44,10 @@ public class RoadTrip implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private RoadTripType roadTripType;
+
+    
+    @Enumerated(EnumType.STRING)
+    private RoadTripStatus status;
 
     @Column(nullable = false)
     private Timestamp startDate;
@@ -156,6 +165,13 @@ public class RoadTrip implements Serializable {
     }
     public void setStopAddress(Address stopAddress) {
         this.stopAddress = stopAddress;
+    }
+
+    public RoadTripStatus getStatus() {
+        return status;
+    }
+    public void setStatus(RoadTripStatus status) {
+        this.status = status;
     }
     
 }

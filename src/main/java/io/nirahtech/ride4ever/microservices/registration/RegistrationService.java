@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.nirahtech.ride4ever.core.environment.Biker;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
 @Component("registrationService")

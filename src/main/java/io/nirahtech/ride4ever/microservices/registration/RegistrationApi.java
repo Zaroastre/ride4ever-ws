@@ -1,6 +1,6 @@
 package io.nirahtech.ride4ever.microservices.registration;
 
-import io.nirahtech.ride4ever.core.environment.Biker;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 
 interface RegistrationApi {
     Biker create(final Biker biker) throws RuntimeException;

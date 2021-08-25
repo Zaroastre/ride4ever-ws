@@ -2,7 +2,7 @@ package io.nirahtech.ride4ever.microservices.authentication;
 
 import java.io.Serializable;
 
-import io.nirahtech.ride4ever.core.environment.Biker;
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 
 final class Session implements Serializable {
     private final Biker biker;

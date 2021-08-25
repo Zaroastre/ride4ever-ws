@@ -1,4 +1,4 @@
-package io.nirahtech.ride4ever.core.environment;
+package io.nirahtech.ride4ever.microservices.roadtrip;
 
 public enum RoadTripType {
     ADVENTURE,
