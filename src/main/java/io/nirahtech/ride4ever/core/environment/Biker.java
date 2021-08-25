@@ -252,4 +252,19 @@ public final class Biker implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Biker [address=" + address + ", allergies=" + allergies + ", biography=" + biography + ", birthDate="
+                + birthDate + ", blood=" + blood + ", canRepairMotorbike=" + canRepairMotorbike + ", driverLicenceDate="
+                + driverLicenceDate + ", email=" + email + ", firstName=" + firstName + ", gender=" + gender
+                + ", hadAllreadyRideWithPassenger=" + hadAllreadyRideWithPassenger + ", hadHaveOperations="
+                + hadHaveOperations + ", identifier=" + identifier + ", isOrganDonor=" + isOrganDonor
+                + ", isTrainedForFirstRescue=" + isTrainedForFirstRescue + ", lastName=" + lastName + ", level=" + level
+                + ", motorbikes=" + motorbikes + ", password=" + password + ", phoneNumber=" + phoneNumber
+                + ", picture=" + picture + ", pseudo=" + pseudo + ", registrationDate=" + registrationDate + ", weight="
+                + weight + ", work=" + work + "]";
+    }
+
+    
 }

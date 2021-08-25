@@ -1,5 +1,6 @@
 package io.nirahtech.ride4ever.microservices.registration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +17,14 @@ import io.nirahtech.ride4ever.core.web.exceptions.MethodNotAllowedException;
 @RestController
 public final class RegistrationController implements RegistrationApi {
 
-    private final RegistrationService service = new RegistrationService();
+    @Autowired
+    private RegistrationService service;
 
     @PostMapping("/register")
     @ResponseBody
     @Override
     public final Biker create(@RequestBody final Biker account) throws RuntimeException {
+        System.out.println(account);
         return this.service.create(account);
     }
 

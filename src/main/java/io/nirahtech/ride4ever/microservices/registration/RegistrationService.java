@@ -5,22 +5,27 @@ import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import io.nirahtech.ride4ever.core.environment.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
+@Component("registrationService")
 public final class RegistrationService implements RegistrationApi {
 
-    private static final BikerService PILOT_SERVICE = BikerService.getInstance();
+    @Autowired
+    private BikerService service;
 
     @Override
     public Biker create(Biker biker) throws RuntimeException {
         biker.setRegistrationDate(Timestamp.from(Instant.now()));
-        return PILOT_SERVICE.create(biker);
+        return service.create(biker);
     }
     
     @Override
     public Biker find(String email) throws RuntimeException {
-        List<Biker> bikers = PILOT_SERVICE.findAll().stream().filter((biker -> biker.getEmail().equalsIgnoreCase(email))).collect(Collectors.toList());
+        List<Biker> bikers = service.findAll().stream().filter((biker -> biker.getEmail().equalsIgnoreCase(email))).collect(Collectors.toList());
         if (bikers != null && !bikers.isEmpty()) {
             return bikers.get(0);
         }
@@ -29,12 +34,12 @@ public final class RegistrationService implements RegistrationApi {
 
     @Override
     public Biker update(Biker biker) throws RuntimeException {
-        return PILOT_SERVICE.update(biker.getIdentifier(), biker);
+        return service.update(biker.getIdentifier(), biker);
     }
 
     @Override
     public Biker delete(Biker biker) throws RuntimeException {
-        return PILOT_SERVICE.delete(biker.getIdentifier());
+        return service.delete(biker.getIdentifier());
     }
 
 }

@@ -128,4 +128,12 @@ public class Motorbike implements Serializable {
         return isRestrained;
     }
 
+    @Override
+    public String toString() {
+        return "Motorbike [brand=" + brand + ", color=" + color + ", engineDisplacement=" + engineDisplacement
+                + ", fuelTankSize=" + fuelTankSize + ", identifier=" + identifier + ", isRestrained=" + isRestrained
+                + ", licensePlate=" + licensePlate + ", mileage=" + mileage + ", model=" + model + ", picture="
+                + picture + ", type=" + type + ", year=" + year + "]";
+    }
+
 }
