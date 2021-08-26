@@ -60,4 +60,9 @@ public final class MotorbikeController implements MotorbikeApi {
     public MotorbikeType[] getMotorbikesTypes() {
         return MotorbikeType.values();
     }
+
+    @GetMapping("/brands")
+    public Brand[] getBrands() {
+        return Brand.values();
+    }
 }

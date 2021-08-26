@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import io.nirahtech.ride4ever.engine.runtime.ApplicationShutdownHook;
 import io.nirahtech.ride4ever.engine.runtime.ApplicationUncaughtExceptionHandler;
+import io.nirahtech.ride4ever.infrastructure.interceptors.LogFilter;
 
 /**
  * Class that represents the entry point of the application.
@@ -74,6 +76,16 @@ public class NirahRide4EverApplication {
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2Server() throws SQLException {
         return Server.createTcpServer("-tcp", "-ifNotExists", "-tcpAllowOthers", "-tcpPort", "8084");
+    }
+
+    @Bean
+    public FilterRegistrationBean<LogFilter> filterRegistrationBean() {
+        FilterRegistrationBean<LogFilter> registrationBean = new FilterRegistrationBean<>();
+        LogFilter filter = new LogFilter();
+        registrationBean.setFilter(filter);
+        registrationBean.addUrlPatterns("/*");
+        // registrationBean.setOrder(2); // set precedence
+        return registrationBean;
     }
 
 }

@@ -70,4 +70,9 @@ public final class BikerController implements BikerApi {
         return this.service.findByEmail(email);
     }
 
+    @GetMapping("/genders")
+    public Gender[] getGenders() {
+        return Gender.values();
+    }
+
 }

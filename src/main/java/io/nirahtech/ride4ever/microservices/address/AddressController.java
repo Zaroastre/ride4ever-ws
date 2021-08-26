@@ -50,4 +50,9 @@ public final class AddressController implements AddressApi {
     public List<Address> findAll() {
         return this.service.findAll();
     }
+
+    @GetMapping("/countries")
+    public Country[] getCountries() {
+        return Country.values();
+    }
 }

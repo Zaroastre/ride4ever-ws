@@ -84,10 +84,9 @@ public final class LocationService implements LocationApi {
     }
 
     private final void init() {
-        File potentialZipFile = new File(ZIP_FILE);
+        File potentialZipFile = new File(DATABASE_FOLDER, ZIP_FILE);
         boolean mustBeDownloaded = false;
         File zipFile = null;
-        System.out.println("Zip exists: " + potentialZipFile.exists());
         if (potentialZipFile.exists()) {
             Instant lastModified = Instant.ofEpochSecond(potentialZipFile.lastModified()/1000);
             long hours = ChronoUnit.HOURS.between(lastModified, Instant.now());
@@ -99,13 +98,14 @@ public final class LocationService implements LocationApi {
         } else {
             mustBeDownloaded = true;
         }
-        System.out.println("Must be updated: " + mustBeDownloaded);
         if (mustBeDownloaded) {
+            File folder = new File(DATABASE_FOLDER);
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
             zipFile = download(DATABASE_CODE, new File(DATABASE_FOLDER, ZIP_FILE).getAbsolutePath());
         }
         File binFile = new File(DATABASE_FOLDER, DATABASAE_FILE_NAME);
-        System.out.println(binFile.getAbsolutePath());
-        System.out.println("Exists: " + binFile.exists());
         if (!binFile.exists() || mustBeDownloaded) {
             if (zipFile != null) {
                 this.database = unzip(zipFile.getAbsolutePath(), DATABASE_FOLDER);

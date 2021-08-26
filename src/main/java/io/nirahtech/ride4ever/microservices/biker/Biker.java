@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -23,7 +25,7 @@ import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
 import io.nirahtech.ride4ever.microservices.roadtrip.RoadTrip;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber" }))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber", "pseudo" }))
 public final class Biker implements Serializable {
 
     @Id
@@ -50,6 +52,8 @@ public final class Biker implements Serializable {
 
     private String picture;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ADDRESS_ID", nullable=true, updatable=true)
     private Address address;
 
     private String work;
