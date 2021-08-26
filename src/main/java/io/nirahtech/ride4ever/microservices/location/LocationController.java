@@ -22,4 +22,6 @@ public final class LocationController implements LocationApi {
     public IPResult resolve(@RequestParam(required=true) final String ipAddress) {
         return this.service.resolve(ipAddress);
     }
+
+    
 }

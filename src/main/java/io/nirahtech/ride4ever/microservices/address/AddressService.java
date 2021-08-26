@@ -1,5 +1,11 @@
 package io.nirahtech.ride4ever.microservices.address;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,6 +54,51 @@ public final class AddressService implements AddressApi {
             list.add(item);
         });
         return list;
+    }
+
+    @Override
+    public String findAddressByCoordinates(double latitude, double longitude) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder().uri(new URI(String.format(
+                    "https://api.opencagedata.com/geocode/v1/json?q=%s+%s&key=641c51bed8ab490184632ad8526e29ad&no_annotations=1&language=en",
+                    latitude, longitude))).version(HttpClient.Version.HTTP_2).GET().build();
+
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            return response.body();
+
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String findWeatherByCoordinates(double latitude, double longitude) {
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(
+                // String.format("https://climacell-microweather-v1.p.rapidapi.com/weather/realtime?lon=%s&lat=%s&fields=humidity",
+                // longitude, latitude)))
+                // .header("x-rapidapi-host", "climacell-microweather-v1.p.rapidapi.com")
+                // .header("x-rapidapi-key",
+                // "2852e0f57fmsh7758376464b87ccp1f5c22jsne8d7cc2eb7c3")
+                // .method("GET", HttpRequest.BodyPublishers.noBody()).build();
+
+                String.format(
+                        "http://api.weatherstack.com/current?access_key=ebb0027b713c0345b01df422408d069a&query=%s,%s",
+                        longitude, latitude)))
+                .method("GET", HttpRequest.BodyPublishers.noBody()).build();
+
+        HttpResponse<String> response;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+            return response.body();
+        } catch (IOException | InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

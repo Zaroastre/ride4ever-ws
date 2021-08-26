@@ -3,6 +3,7 @@ package io.nirahtech.ride4ever.microservices.authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,11 @@ public final class AuthenticationController implements AuthenticationApi {
         return this.service.login(credential);
     }
 
-    @DeleteMapping("/logout")
+    @DeleteMapping("/logout/{sessionID}")
     @ResponseBody
     @Override
-    public void logout(@RequestBody Session session) throws RuntimeException {
-        this.service.logout(session);
+    public void logout(@PathVariable String sessionID) throws RuntimeException {
+        this.service.logout(sessionID);
     }
     
 }

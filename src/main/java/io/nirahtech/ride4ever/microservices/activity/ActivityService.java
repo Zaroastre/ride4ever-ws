@@ -55,4 +55,9 @@ public final class ActivityService implements ActivityApi {
         return this.repository.findByEvent(event);
     }
 
+    @Override
+    public List<Activity> findByPseudo(String pseudo) {
+        return this.repository.findByPseudo(pseudo);
+    }
+
 }

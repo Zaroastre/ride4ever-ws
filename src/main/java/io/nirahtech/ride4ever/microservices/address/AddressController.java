@@ -51,6 +51,20 @@ public final class AddressController implements AddressApi {
         return this.service.findAll();
     }
 
+    @Override
+    public String findWeatherByCoordinates(double latitude, double longitude) {
+        try {
+            return this.service.findWeatherByCoordinates(latitude, longitude);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public String findAddressByCoordinates(double latitude, double longitude) {
+        return this.service.findAddressByCoordinates(latitude, longitude);
+    }
+
     @GetMapping("/countries")
     public Country[] getCountries() {
         return Country.values();

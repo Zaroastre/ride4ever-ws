@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository("activityRepository")
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> findByEvent(EventType event); 
+    List<Activity> findByPseudo(String pseudo); 
 }

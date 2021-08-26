@@ -16,4 +16,13 @@ public enum EventType {
     ORGANIZE_ROADTRIP,
     UPDATE_ROADTRIP,
     DELETE_ROADTRIP;
+
+    public static final EventType parse(String value) {
+        for (EventType enumeration : EventType.values()) {
+            if (enumeration.name().equalsIgnoreCase(value)) {
+                return enumeration;
+            }
+        }
+        return null;
+    }
 }

@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import io.nirahtech.ride4ever.microservices.activity.Activity;
+import io.nirahtech.ride4ever.microservices.activity.ActivityService;
+import io.nirahtech.ride4ever.microservices.activity.EventType;
 import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
@@ -17,10 +20,18 @@ public final class RegistrationService implements RegistrationApi {
     @Autowired
     private BikerService service;
 
+    @Autowired
+    private ActivityService activityService;
+
+
     @Override
     public Biker create(Biker biker) throws RuntimeException {
         biker.setRegistrationDate(Timestamp.from(Instant.now()));
-        return service.create(biker);
+        Biker account = service.create(biker);
+        if (account != null) {
+            activityService.create(new Activity(Timestamp.from(Instant.now()), EventType.ACCOUNT_REGISTRATION, account.getPseudo(), null));
+        }
+        return account;
     }
     
     @Override

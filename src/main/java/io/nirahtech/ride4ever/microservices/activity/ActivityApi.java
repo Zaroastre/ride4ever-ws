@@ -7,4 +7,5 @@ import io.nirahtech.ride4ever.infrastructure.api.Crud;
 interface ActivityApi extends Crud<Integer,  Activity> {
     List<Activity> findAll();
     List<Activity> findByEvent(EventType event);
+    List<Activity> findByPseudo(String pseudo);
 }

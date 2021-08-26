@@ -1,11 +1,13 @@
 package io.nirahtech.ride4ever.microservices.authentication;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
+import io.nirahtech.ride4ever.microservices.activity.Activity;
+import io.nirahtech.ride4ever.microservices.activity.ActivityService;
+import io.nirahtech.ride4ever.microservices.activity.EventType;
 import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 
@@ -27,6 +32,9 @@ public final class AuthenticationService implements AuthenticationApi {
 
     @Autowired
     private BikerService service;
+
+    @Autowired
+    private ActivityService activityService;
 
     @Override
     public Session login(Credential credential) throws RuntimeException {
@@ -57,6 +65,7 @@ public final class AuthenticationService implements AuthenticationApi {
                         SESSIONS.put(credential, session);
                     }
                 }
+                activityService.create(new Activity(Timestamp.from(Instant.now()), EventType.LOGIN, biker.getPseudo(), null));
             } else {
                 throw new BadRequestException("Invalid password.");
             }
@@ -67,8 +76,18 @@ public final class AuthenticationService implements AuthenticationApi {
     }
 
     @Override
-    public void logout(Session session) throws RuntimeException {
-        // TODO Auto-generated method stub
+    public void logout(String sessionID) throws RuntimeException {
+        Credential sessionToDelete = null;
+        for (Entry<Credential, Session> entry : SESSIONS.entrySet()) {
+            if (entry.getValue().getId().equals(sessionID)) {
+                sessionToDelete = entry.getKey();
+                activityService.create(new Activity(Timestamp.from(Instant.now()), EventType.LOGOUT, entry.getValue().getBiker().getPseudo(), null));
+                break;
+            }
+        }
+        if (sessionToDelete != null) {
+            SESSIONS.remove(sessionToDelete);
+        }
 
     }
 }

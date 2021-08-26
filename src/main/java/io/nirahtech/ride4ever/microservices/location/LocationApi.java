@@ -4,4 +4,5 @@ import com.ip2location.IPResult;
 
 public interface LocationApi {
     IPResult resolve(final String ipAddress);
+    
 }

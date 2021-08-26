@@ -1,6 +1,9 @@
 package io.nirahtech.ride4ever.microservices.activity;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,16 +43,39 @@ public final class ActivityController implements ActivityApi {
         throw new NotImplementedException();
     }
 
-    @GetMapping
     @Override
     public List<Activity> findAll() {
         return this.service.findAll();
     }
 
+    @GetMapping
+    public List<Activity> findAll(HttpServletRequest request) {
+        List<Activity> activities = null;
+        if (request.getParameterMap().keySet().contains("pseudo")) {
+            activities = this.findByPseudo(request.getParameter("pseudo"));
+        }
+        if (request.getParameterMap().keySet().contains("event")) {
+            if (activities == null) {
+                activities = this.findByEvent(EventType.parse(request.getParameter("event")));
+            } else {
+                activities = activities
+                    .stream()
+                    .filter((activity) -> activity.getEvent() == EventType.parse(request.getParameter("event")))
+                    .collect(Collectors.toList());
+            }
+        }
+        if (activities == null) {
+            return this.findAll();
+        }
+        return activities;
+    }
     @Override
     public List<Activity> findByEvent(EventType event) {
-        // TODO Auto-generated method stub
-        return null;
+        return this.service.findByEvent(event);
+    }
+    @Override
+    public List<Activity> findByPseudo(String pseudo) {
+        return this.service.findByPseudo(pseudo);
     }
 
     @GetMapping("/events-types")

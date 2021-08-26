@@ -59,5 +59,17 @@ public final class Activity implements Serializable, Comparable<Activity> {
     public int compareTo(Activity o) {
         return 0;
     }
-        
+    
+    public Activity() {
+
+    }
+    
+    public Activity(Timestamp date, EventType event, String pseudo, String detail) {
+        this.date = date;
+        this.event = event;
+        this.pseudo = pseudo;
+        this.detail = detail;
+    }
+
+    
 }
