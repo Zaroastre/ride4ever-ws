@@ -2,6 +2,8 @@ package io.nirahtech.ride4ever.microservices.roadtrip;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.nirahtech.ride4ever.microservices.location.RequestService;
+
 @CrossOrigin("*")
 @RequestMapping("/roadtrips")
 @RestController
@@ -20,6 +24,9 @@ public final class RoadTripController implements RoadTripApi {
 
     @Autowired
     private RoadTripService service;
+
+    @Autowired
+	private RequestService requestService;
 
     @PostMapping
     @Override
@@ -46,9 +53,14 @@ public final class RoadTripController implements RoadTripApi {
         return this.service.delete(identifier);
     }
 
-    @GetMapping
     @Override
     public List<RoadTrip> findAll() {
+        return this.service.findAll();
+    }
+    @GetMapping
+    public List<RoadTrip> findAll(HttpServletRequest request) {
+        String clientIp = requestService.getClientIp(request);
+        System.out.println(clientIp);
         return this.service.findAll();
     }
 

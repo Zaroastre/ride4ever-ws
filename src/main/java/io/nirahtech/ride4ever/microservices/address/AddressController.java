@@ -24,7 +24,6 @@ public final class AddressController implements AddressApi {
     @PostMapping
     @Override
     public Address create(@RequestBody Address entity) {
-        System.out.println(entity);
         return this.service.create(entity);
     }
 

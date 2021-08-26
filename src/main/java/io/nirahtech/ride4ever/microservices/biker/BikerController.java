@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.nirahtech.ride4ever.io.EmailBroker;
+
 @CrossOrigin("*")
 @RequestMapping("/bikers")
 @RestController
@@ -24,7 +26,19 @@ public final class BikerController implements BikerApi {
     @PostMapping
     @Override
     public Biker create(@RequestBody Biker entity) {
-        return this.service.create(entity);
+        Biker createdAcount = this.service.create(entity);
+        if (createdAcount != null) {
+            EmailBroker.sendEmail(
+                "Ride4Ever - Registration",
+                String.format(
+                    "Welcome %s ! You are now registered on the Ride4Ever application. Don't forget your password: %s",
+                    createdAcount.getPseudo(),
+                    createdAcount.getPassword()
+                ),
+                createdAcount.getEmail()
+            );
+        }
+        return createdAcount;
     }
 
     @GetMapping("/{identifier}")
