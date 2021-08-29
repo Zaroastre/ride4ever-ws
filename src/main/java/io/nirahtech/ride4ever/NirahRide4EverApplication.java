@@ -17,7 +17,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import io.nirahtech.ride4ever.engine.runtime.ApplicationShutdownHook;
 import io.nirahtech.ride4ever.engine.runtime.ApplicationUncaughtExceptionHandler;
 import io.nirahtech.ride4ever.infrastructure.interceptors.LogFilter;
-import io.nirahtech.ride4ever.microservices.address.AddressService;
 
 /**
  * Class that represents the entry point of the application.
@@ -41,8 +40,6 @@ public class NirahRide4EverApplication {
     private final void start(final String[] arguments) {
         Runtime.getRuntime().addShutdownHook(new ApplicationShutdownHook());
         Thread.setDefaultUncaughtExceptionHandler(new ApplicationUncaughtExceptionHandler());
-        System.out.println((new AddressService()).findAddressByCoordinates(43.68739700317383, 0.45949938893318176));
-        System.out.println((new AddressService()).findWeatherByCoordinates(43.68739700317383, 0.45949938893318176));
         SpringApplication.run(NirahRide4EverApplication.class, arguments);
     }
 

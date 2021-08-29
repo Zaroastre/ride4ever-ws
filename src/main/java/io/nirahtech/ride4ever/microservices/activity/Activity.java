@@ -70,6 +70,47 @@ public final class Activity implements Serializable, Comparable<Activity> {
         this.pseudo = pseudo;
         this.detail = detail;
     }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((detail == null) ? 0 : detail.hashCode());
+        result = prime * result + ((event == null) ? 0 : event.hashCode());
+        result = prime * result + identifier;
+        result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
+        return result;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Activity other = (Activity) obj;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (detail == null) {
+            if (other.detail != null)
+                return false;
+        } else if (!detail.equals(other.detail))
+            return false;
+        if (event != other.event)
+            return false;
+        if (identifier != other.identifier)
+            return false;
+        if (pseudo == null) {
+            if (other.pseudo != null)
+                return false;
+        } else if (!pseudo.equals(other.pseudo))
+            return false;
+        return true;
+    }
 
     
 }

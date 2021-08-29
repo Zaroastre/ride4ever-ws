@@ -7,4 +7,5 @@ import io.nirahtech.ride4ever.infrastructure.api.Crud;
 interface BikerApi extends Crud<Integer,  Biker> {
     List<Biker> findAll();
     Biker findByEmail(final String email);
+    Biker findByPseudo(final String pseudo);
 }

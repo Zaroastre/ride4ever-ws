@@ -10,7 +10,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public final class EmailBroker {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailBroker.class);
+    
     public static final void sendEmail(final String subject, final String text, final String... destinations) {
         final String username = "nicolas.a.metivier@gmail.com";
         final String password = "zboclhfqcqvgvjex";
@@ -20,6 +26,11 @@ public final class EmailBroker {
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        for (String to : destinations) {
+            LOGGER.info(String.format("An email will be send to: %s", to));
+        }
+
         
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {

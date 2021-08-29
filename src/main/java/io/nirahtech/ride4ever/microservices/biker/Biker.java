@@ -52,9 +52,9 @@ public final class Biker implements Serializable {
 
     private String picture;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="ADDRESS_ID", nullable=true, updatable=true)
-    private Address address;
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name="ADDRESS_ID", nullable=true, updatable=true)
+    private int address;
 
     private String work;
 
@@ -258,10 +258,10 @@ public final class Biker implements Serializable {
         return hadAllreadyRideWithPassenger;
     }
 
-    public Address getAddress() {
+    public int getAddress() {
         return address;
     }
-    public void setAddress(Address address) {
+    public void setAddress(int address) {
         this.address = address;
     }
 
@@ -276,6 +276,146 @@ public final class Biker implements Serializable {
                 + ", motorbikes=" + motorbikes + ", password=" + password + ", phoneNumber=" + phoneNumber
                 + ", picture=" + picture + ", pseudo=" + pseudo + ", registrationDate=" + registrationDate + ", weight="
                 + weight + ", work=" + work + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + address;
+        result = prime * result + ((allergies == null) ? 0 : allergies.hashCode());
+        result = prime * result + ((biography == null) ? 0 : biography.hashCode());
+        result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
+        result = prime * result + ((blood == null) ? 0 : blood.hashCode());
+        result = prime * result + (canRepairMotorbike ? 1231 : 1237);
+        result = prime * result + ((driverLicenceDate == null) ? 0 : driverLicenceDate.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+        result = prime * result + (hadAllreadyRideWithPassenger ? 1231 : 1237);
+        result = prime * result + (hadHaveOperations ? 1231 : 1237);
+        result = prime * result + identifier;
+        result = prime * result + (isOrganDonor ? 1231 : 1237);
+        result = prime * result + (isTrainedForFirstRescue ? 1231 : 1237);
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + level;
+        result = prime * result + ((motorbikes == null) ? 0 : motorbikes.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+        result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+        result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
+        result = prime * result + ((registrationDate == null) ? 0 : registrationDate.hashCode());
+        result = prime * result + ((roadTrips == null) ? 0 : roadTrips.hashCode());
+        result = prime * result + weight;
+        result = prime * result + ((work == null) ? 0 : work.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Biker other = (Biker) obj;
+        if (allergies == null) {
+            if (other.allergies != null)
+                return false;
+        } else if (!allergies.equals(other.allergies))
+            return false;
+        if (biography == null) {
+            if (other.biography != null)
+                return false;
+        } else if (!biography.equals(other.biography))
+            return false;
+        if (birthDate == null) {
+            if (other.birthDate != null)
+                return false;
+        } else if (!birthDate.equals(other.birthDate))
+            return false;
+        if (blood != other.blood)
+            return false;
+        if (canRepairMotorbike != other.canRepairMotorbike)
+            return false;
+        if (driverLicenceDate == null) {
+            if (other.driverLicenceDate != null)
+                return false;
+        } else if (!driverLicenceDate.equals(other.driverLicenceDate))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (gender != other.gender)
+            return false;
+        if (hadAllreadyRideWithPassenger != other.hadAllreadyRideWithPassenger)
+            return false;
+        if (hadHaveOperations != other.hadHaveOperations)
+            return false;
+        if (identifier != other.identifier)
+            return false;
+        if (isOrganDonor != other.isOrganDonor)
+            return false;
+        if (isTrainedForFirstRescue != other.isTrainedForFirstRescue)
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (level != other.level)
+            return false;
+        if (motorbikes == null) {
+            if (other.motorbikes != null)
+                return false;
+        } else if (!motorbikes.equals(other.motorbikes))
+            return false;
+        if (password == null) {
+            if (other.password != null)
+                return false;
+        } else if (!password.equals(other.password))
+            return false;
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null)
+                return false;
+        } else if (!phoneNumber.equals(other.phoneNumber))
+            return false;
+        if (picture == null) {
+            if (other.picture != null)
+                return false;
+        } else if (!picture.equals(other.picture))
+            return false;
+        if (pseudo == null) {
+            if (other.pseudo != null)
+                return false;
+        } else if (!pseudo.equals(other.pseudo))
+            return false;
+        if (registrationDate == null) {
+            if (other.registrationDate != null)
+                return false;
+        } else if (!registrationDate.equals(other.registrationDate))
+            return false;
+        if (roadTrips == null) {
+            if (other.roadTrips != null)
+                return false;
+        } else if (!roadTrips.equals(other.roadTrips))
+            return false;
+        if (weight != other.weight)
+            return false;
+        if (work == null) {
+            if (other.work != null)
+                return false;
+        } else if (!work.equals(other.work))
+            return false;
+        return true;
     }
 
     

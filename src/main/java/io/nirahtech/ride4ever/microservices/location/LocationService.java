@@ -5,7 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -129,5 +134,23 @@ public final class LocationService implements LocationApi {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public String resolve(final double latitude, final double longitude) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder().uri(new URI(String.format(
+                    "https://api.opencagedata.com/geocode/v1/json?q=%s+%s&key=641c51bed8ab490184632ad8526e29ad&no_annotations=1&language=en",
+                    latitude, longitude))).version(HttpClient.Version.HTTP_2).GET().build();
+
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            return response.body();
+
+        } catch (URISyntaxException | IOException | InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
     }
 }

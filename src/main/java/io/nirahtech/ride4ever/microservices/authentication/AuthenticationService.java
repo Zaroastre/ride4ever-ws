@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.nirahtech.ride4ever.engine.encryption.PasswordEncrypt;
 import io.nirahtech.ride4ever.infrastructure.exceptions.BadRequestException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.InternalProcessException;
 import io.nirahtech.ride4ever.infrastructure.exceptions.ResourceNotFoundException;
@@ -42,7 +43,7 @@ public final class AuthenticationService implements AuthenticationApi {
         Biker biker = service.findByEmail(credential.getUsername());
         Session session = null;
         if (biker != null) {
-            if (biker.getPassword().equals(credential.getPassword())) {
+            if (biker.getPassword().equals(PasswordEncrypt.encrypt(credential.getPassword()))) {
                 try {
                     jwt = Jwts.builder()
                         .claim("email", credential.getUsername())

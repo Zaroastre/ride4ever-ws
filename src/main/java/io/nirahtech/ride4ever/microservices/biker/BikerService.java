@@ -60,7 +60,12 @@ public final class BikerService implements BikerApi {
 
     @Override
     public Biker findByEmail(String email) {
-        return this.repository.findByEmail(email);
+        return this.repository.findFirstByEmail(email);
+    }
+
+    @Override
+    public Biker findByPseudo(String pseudo) {
+        return this.repository.findFirstByPseudo(pseudo);
     }
 
 }

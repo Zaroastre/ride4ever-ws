@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import io.nirahtech.ride4ever.engine.encryption.PasswordEncrypt;
 import io.nirahtech.ride4ever.microservices.activity.Activity;
 import io.nirahtech.ride4ever.microservices.activity.ActivityService;
 import io.nirahtech.ride4ever.microservices.activity.EventType;
@@ -27,6 +28,7 @@ public final class RegistrationService implements RegistrationApi {
     @Override
     public Biker create(Biker biker) throws RuntimeException {
         biker.setRegistrationDate(Timestamp.from(Instant.now()));
+        biker.setPassword(PasswordEncrypt.encrypt(biker.getPassword()));
         Biker account = service.create(biker);
         if (account != null) {
             activityService.create(new Activity(Timestamp.from(Instant.now()), EventType.ACCOUNT_REGISTRATION, account.getPseudo(), null));

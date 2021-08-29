@@ -60,11 +60,6 @@ public final class AddressController implements AddressApi {
         }
     }
 
-    @Override
-    public String findAddressByCoordinates(double latitude, double longitude) {
-        return this.service.findAddressByCoordinates(latitude, longitude);
-    }
-
     @GetMapping("/countries")
     public Country[] getCountries() {
         return Country.values();

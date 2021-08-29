@@ -17,11 +17,16 @@ public final class LocationController implements LocationApi {
     @Autowired
     private LocationService service;
 
-    @GetMapping
+    @GetMapping("/ip-lookup")
     @Override
     public IPResult resolve(@RequestParam(required=true) final String ipAddress) {
         return this.service.resolve(ipAddress);
     }
 
+    @GetMapping("coordinates-lookup")
+    @Override
+    public String resolve(@RequestParam(required=true) double latitude, @RequestParam(required=true) double longitude) {
+        return this.service.resolve(latitude, longitude);
+    }
     
 }

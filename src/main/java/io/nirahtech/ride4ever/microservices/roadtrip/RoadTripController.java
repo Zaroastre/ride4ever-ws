@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.nirahtech.ride4ever.microservices.biker.Biker;
+import io.nirahtech.ride4ever.microservices.biker.BikerService;
 import io.nirahtech.ride4ever.microservices.location.RequestService;
 
 @CrossOrigin("*")
@@ -28,6 +29,9 @@ public final class RoadTripController implements RoadTripApi {
 
     @Autowired
     private RoadTripService service;
+    
+    @Autowired
+    private BikerService bikerService;
 
     @Autowired
 	private RequestService requestService;
@@ -65,10 +69,13 @@ public final class RoadTripController implements RoadTripApi {
     public List<RoadTrip> findAll(HttpServletRequest request) {
         List<RoadTrip> roadTrips = this.findAll();
         if (request.getParameterMap().keySet().contains("organizer_pseudo")) {
-            roadTrips = roadTrips
-                .stream()
-                .filter((roadtrip) -> roadtrip.getOrganizer().getPseudo().equalsIgnoreCase(request.getParameter("organizer_pseudo")))
-                .collect(Collectors.toList());
+            Biker biker = bikerService.findByPseudo(request.getParameter("organizer_pseudo"));
+            if (biker != null) {
+                roadTrips = roadTrips
+                    .stream()
+                    .filter((roadtrip) -> roadtrip.getOrganizer() > 0 && roadtrip.getOrganizer() == biker.getIdentifier())
+                    .collect(Collectors.toList());
+            }
         }
         if (request.getParameterMap().keySet().contains("status")) {
             roadTrips = roadTrips

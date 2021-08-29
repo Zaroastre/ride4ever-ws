@@ -2,7 +2,6 @@ package io.nirahtech.ride4ever.microservices.address;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -21,7 +20,11 @@ public final class AddressService implements AddressApi {
 
     @Override
     public Address create(Address entity) {
-        return this.repository.save(entity);
+        List<Address> existingMatchedAddresses = this.repository.findByNumberAndStreetAndZipCodeAndCountry(entity.getNumber(), entity.getStreet(), entity.getZipCode(), entity.getCountry());
+        if (existingMatchedAddresses.size() == 0) {
+            return this.repository.save(entity);
+        }
+        return existingMatchedAddresses.get(0);
     }
 
     @Override
@@ -54,24 +57,6 @@ public final class AddressService implements AddressApi {
             list.add(item);
         });
         return list;
-    }
-
-    @Override
-    public String findAddressByCoordinates(double latitude, double longitude) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder().uri(new URI(String.format(
-                    "https://api.opencagedata.com/geocode/v1/json?q=%s+%s&key=641c51bed8ab490184632ad8526e29ad&no_annotations=1&language=en",
-                    latitude, longitude))).version(HttpClient.Version.HTTP_2).GET().build();
-
-            HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            return response.body();
-
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-        }
     }
 
     @Override

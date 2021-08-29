@@ -69,6 +69,10 @@ public final class BikerController implements BikerApi {
     public Biker findByEmail(String email) {
         return this.service.findByEmail(email);
     }
+    @Override
+    public Biker findByPseudo(String pseudo) {
+        return this.service.findByPseudo(pseudo);
+    }
 
     @GetMapping("/genders")
     public Gender[] getGenders() {
