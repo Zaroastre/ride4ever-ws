@@ -2,8 +2,8 @@ package io.nirahtech.ride4ever.microservices.biker;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 import io.nirahtech.ride4ever.microservices.address.Address;
 import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
-import io.nirahtech.ride4ever.microservices.roadtrip.RoadTrip;
+import io.nirahtech.ride4ever.microservices.reservation.Reservation;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber", "pseudo" }))
@@ -44,17 +44,14 @@ public final class Biker implements Serializable {
     private String phoneNumber;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizer")
-    private List<RoadTrip> roadTrips;
-
     @Column(length = 200)
     private String biography;
 
     private String picture;
 
-    // @ManyToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(name="ADDRESS_ID", nullable=true, updatable=true)
-    private int address;
+    @ManyToOne
+    @JoinColumn(name="address_id")
+    private Address address;
 
     private String work;
 
@@ -71,8 +68,8 @@ public final class Biker implements Serializable {
     private int level;
     // private int reputation;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
-    private List<Motorbike> motorbikes = new ArrayList<>();
+    @OneToMany(mappedBy = "biker")
+    private Set<Motorbike> motorbikes = new HashSet<>();
 
     private boolean hadAllreadyRideWithPassenger = false;
 
@@ -183,13 +180,7 @@ public final class Biker implements Serializable {
     public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
-    public List<Motorbike> getMotorbikes() {
-        return motorbikes;
-    }
-    public void setMotorbikes(List<Motorbike> motorbikes) {
-        this.motorbikes = motorbikes;
-    }
-
+    
     public String getBiography() {
         return biography;
     }
@@ -258,10 +249,10 @@ public final class Biker implements Serializable {
         return hadAllreadyRideWithPassenger;
     }
 
-    public int getAddress() {
+    public Address getAddress() {
         return address;
     }
-    public void setAddress(int address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -273,7 +264,7 @@ public final class Biker implements Serializable {
                 + ", hadAllreadyRideWithPassenger=" + hadAllreadyRideWithPassenger + ", hadHaveOperations="
                 + hadHaveOperations + ", identifier=" + identifier + ", isOrganDonor=" + isOrganDonor
                 + ", isTrainedForFirstRescue=" + isTrainedForFirstRescue + ", lastName=" + lastName + ", level=" + level
-                + ", motorbikes=" + motorbikes + ", password=" + password + ", phoneNumber=" + phoneNumber
+                + /* ", motorbikes=" + motorbikes + */ ", password=" + password + ", phoneNumber=" + phoneNumber
                 + ", picture=" + picture + ", pseudo=" + pseudo + ", registrationDate=" + registrationDate + ", weight="
                 + weight + ", work=" + work + "]";
     }
@@ -282,7 +273,7 @@ public final class Biker implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + address;
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
         result = prime * result + ((allergies == null) ? 0 : allergies.hashCode());
         result = prime * result + ((biography == null) ? 0 : biography.hashCode());
         result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
@@ -305,7 +296,6 @@ public final class Biker implements Serializable {
         result = prime * result + ((picture == null) ? 0 : picture.hashCode());
         result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
         result = prime * result + ((registrationDate == null) ? 0 : registrationDate.hashCode());
-        result = prime * result + ((roadTrips == null) ? 0 : roadTrips.hashCode());
         result = prime * result + weight;
         result = prime * result + ((work == null) ? 0 : work.hashCode());
         return result;
@@ -320,6 +310,11 @@ public final class Biker implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Biker other = (Biker) obj;
+        if (address == null) {
+            if (other.address != null)
+                return false;
+        } else if (!address.equals(other.address))
+            return false;
         if (allergies == null) {
             if (other.allergies != null)
                 return false;
@@ -403,11 +398,6 @@ public final class Biker implements Serializable {
                 return false;
         } else if (!registrationDate.equals(other.registrationDate))
             return false;
-        if (roadTrips == null) {
-            if (other.roadTrips != null)
-                return false;
-        } else if (!roadTrips.equals(other.roadTrips))
-            return false;
         if (weight != other.weight)
             return false;
         if (work == null) {
@@ -418,5 +408,4 @@ public final class Biker implements Serializable {
         return true;
     }
 
-    
 }

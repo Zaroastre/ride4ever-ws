@@ -22,10 +22,13 @@ import java.util.zip.ZipInputStream;
 import com.ip2location.IP2Location;
 import com.ip2location.IPResult;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("locationService")
 public final class LocationService implements LocationApi {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
 
     private final String DATABASE_FOLDER = "ip2location";
     private final String DATABASE_CODE = "DB9LITEBIN";
@@ -36,17 +39,25 @@ public final class LocationService implements LocationApi {
     private File database = null; 
 
     private final File download(String code, String destination) {
+        LOGGER.info("Starting download process...");
+        File result = null;
         try {
+            LOGGER.info("Starting download...");
             InputStream in = new URL(URL).openStream();
             Files.copy(in, Paths.get(destination), StandardCopyOption.REPLACE_EXISTING);
-            return new File(destination);
+            LOGGER.info("Download finished.");
+            result = new File(destination);
+            LOGGER.info("Downloaded file: " + result.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            result = null;
         }
+        LOGGER.info("End of download process.");
+        return result;
     }
 
     private static File unzip(String zipFilePath, String destDir) {
+        LOGGER.info("Starting unzip process...");
         File dir = new File(destDir);
         // create output directory if it doesn't exist
         if (!dir.exists())
@@ -85,6 +96,7 @@ public final class LocationService implements LocationApi {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        LOGGER.info("End of unzip process.");
         return binfile;
     }
 

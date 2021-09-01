@@ -1,9 +1,15 @@
 package io.nirahtech.ride4ever.microservices.motorbike;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository("motorbikeRepository")
-public interface MotorbikeRepository extends JpaRepository<Motorbike, Integer> {
+public interface MotorbikeRepository extends CrudRepository<Motorbike, Integer> {
     Motorbike findByLicensePlate(final String licensePlate);
+
+    @Query("SELECT m FROM Motorbike m WHERE m.biker.pseudo=?1")
+    List<Motorbike> findByBikerPseudo(final String pseudo);
 }

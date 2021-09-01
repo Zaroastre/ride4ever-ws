@@ -1,15 +1,21 @@
 package io.nirahtech.ride4ever.microservices.motorbike;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import io.nirahtech.ride4ever.microservices.biker.Biker;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "licensePlate" }))
@@ -31,6 +37,10 @@ public class Motorbike implements Serializable {
     @Enumerated(EnumType.STRING)
     private MotorbikeType type;
     private boolean isRestrained = false;
+
+    @ManyToOne
+    @JoinColumn(name="biker_id")
+    private Biker biker;
 
     public Motorbike() {
 
@@ -119,6 +129,13 @@ public class Motorbike implements Serializable {
     }
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Biker getBiker() {
+        return biker;
+    }
+    public void setBiker(Biker biker) {
+        this.biker = biker;
     }
 
     public void setIsRestrained(boolean isRestrained) {

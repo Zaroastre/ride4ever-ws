@@ -2,7 +2,7 @@ package io.nirahtech.ride4ever.microservices.roadtrip;
 
 public enum RoadTripType {
     ADVENTURE,
-    RELEX,
+    RELAX,
     SPORTIVE,
     TRAINING,
     LUCRATIVE;

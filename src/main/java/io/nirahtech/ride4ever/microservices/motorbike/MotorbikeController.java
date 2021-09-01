@@ -2,6 +2,8 @@ package io.nirahtech.ride4ever.microservices.motorbike;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,6 +48,17 @@ public final class MotorbikeController implements MotorbikeApi {
     }
 
     @GetMapping
+    public List<Motorbike> findAll(HttpServletRequest request) {
+        List<Motorbike> result = null;
+        if (request.getParameterMap().keySet().contains("biker_pseudo")) {
+            result = this.findByBikerPseudo(request.getParameter("biker_pseudo"));
+        }
+        if (result == null) {
+            return this.findAll();
+        }
+        return result;
+    }
+
     @Override
     public List<Motorbike> findAll() {
         return this.service.findAll();
@@ -54,6 +67,11 @@ public final class MotorbikeController implements MotorbikeApi {
     @Override
     public Motorbike findByLicensePlate(String licensePlate) {
         return this.service.findByLicensePlate(licensePlate);
+    }
+
+    @Override
+    public List<Motorbike> findByBikerPseudo(String pseudo) {
+        return this.service.findByBikerPseudo(pseudo);
     }
 
     @GetMapping("/types")

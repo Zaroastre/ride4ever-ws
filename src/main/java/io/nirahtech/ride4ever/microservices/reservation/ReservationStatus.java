@@ -1,7 +1,6 @@
 package io.nirahtech.ride4ever.microservices.reservation;
 
 public enum ReservationStatus {
-    CREATED,
     PENDING,
     ACCEPTED,   
     DENIED;

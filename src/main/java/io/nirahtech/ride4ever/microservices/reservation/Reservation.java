@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.roadtrip.RoadTrip;
@@ -21,16 +21,16 @@ public class Reservation implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "roadtrip_id")
+    @Column(name = "reservation_id")
     private int identifier;
 
-    // @OneToOne(optional = false)
-    // @JoinColumn(name = "biker_id")
-    private int biker;
+    @ManyToOne
+    @JoinColumn(name = "biker_id")
+    private Biker biker;
 
-    // @OneToOne(optional = false)
-    // @JoinColumn(name = "roadtrip_id")
-    private int roadTrip;
+    @ManyToOne
+    @JoinColumn(name = "roadtrip_id")
+    private RoadTrip roadTrip;
     
     private Timestamp date;
 
@@ -45,19 +45,19 @@ public class Reservation implements Serializable {
         this.identifier = identifier;
     }
 
-    public int getBiker() {
+    public Biker getBiker() {
         return biker;
     }
 
-    public void setBiker(int biker) {
+    public void setBiker(Biker biker) {
         this.biker = biker;
     }
 
-    public int getRoadTrip() {
+    public RoadTrip getRoadTrip() {
         return roadTrip;
     }
 
-    public void setRoadTrip(int roadTrip) {
+    public void setRoadTrip(RoadTrip roadTrip) {
         this.roadTrip = roadTrip;
     }
 
@@ -75,6 +75,12 @@ public class Reservation implements Serializable {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation [biker=" + biker + ", date=" + date + ", identifier=" + identifier + ", roadTrip="
+                + roadTrip + ", status=" + status + "]";
     }
 
 }

@@ -63,4 +63,9 @@ public final class MotorbikeService implements MotorbikeApi {
         return this.repository.findByLicensePlate(licensePlate);
     }
 
+    @Override
+    public List<Motorbike> findByBikerPseudo(String pseudo) {
+        return this.repository.findByBikerPseudo(pseudo);
+    }
+
 }

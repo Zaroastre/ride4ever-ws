@@ -32,16 +32,12 @@ public class RoadTrip implements Serializable {
     @Column(nullable = false)
     private String title;
     private String description = null;
-    private int organizer;
+
+    @ManyToOne
+    @JoinColumn(name="organizer_id")
+    private Biker organizer;
+
     private int maxBikers = 0;
-
-
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
-    private List<Biker> candidates = new ArrayList<>();
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
-    private List<Biker> bikers = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private RoadTripType roadTripType;
@@ -54,18 +50,22 @@ public class RoadTrip implements Serializable {
     private Timestamp startDate;
     private Timestamp endDate;
 
-    // @ManyToOne(cascade = CascadeType.MERGE)
-    // @JoinColumn(name="START_ADDRESS_ID", nullable=true, updatable=true)
-    private int startAddress = 0;
+    @ManyToOne
+    @JoinColumn(name="start_address_id")
+    private Address startAddress;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=false)
     private List<Address> destinations = new ArrayList<>();
 
-    // @ManyToOne(cascade = CascadeType.MERGE)
-    // @JoinColumn(name="STOP_ADDRESS_ID", nullable=true, updatable=true)
-    private int stopAddress = 0;
+    @ManyToOne
+    @JoinColumn(name="stop_address_id")
+    private Address stopAddress;
 
     private int kilometersAverage;
+
+    public RoadTrip() {
+        
+    }
 
     public String getTitle() {
         return title;
@@ -83,11 +83,11 @@ public class RoadTrip implements Serializable {
         this.description = description;
     }
 
-    public int getOrganizer() {
+    public Biker getOrganizer() {
         return organizer;
     }
 
-    public void setOrganizer(int organizer) {
+    public void setOrganizer(Biker organizer) {
         this.organizer = organizer;
     }
 
@@ -98,21 +98,6 @@ public class RoadTrip implements Serializable {
         this.maxBikers = maxBikers;
     }
     
-    public List<Biker> getCandidates() {
-        return candidates;
-    }
-
-    public void setCandidates(List<Biker> candidates) {
-        this.candidates = candidates;
-    }
-
-    public List<Biker> getBikers() {
-        return bikers;
-    }
-    public void setBikers(List<Biker> bikers) {
-        this.bikers = bikers;
-    }
-
     public RoadTripType getRoadTripType() {
         return roadTripType;
     }
@@ -154,19 +139,19 @@ public class RoadTrip implements Serializable {
     public List<Address> getDestinations() {
         return destinations;
     }
-    public int getStartAddress() {
+    public Address getStartAddress() {
         return startAddress;
     }
-    public int getStopAddress() {
+    public Address getStopAddress() {
         return stopAddress;
     }
     public void setDestinations(List<Address> destinations) {
         this.destinations = destinations;
     }
-    public void setStartAddress(int startAddress) {
+    public void setStartAddress(Address startAddress) {
         this.startAddress = startAddress;
     }
-    public void setStopAddress(int stopAddress) {
+    public void setStopAddress(Address stopAddress) {
         this.stopAddress = stopAddress;
     }
 
@@ -181,20 +166,17 @@ public class RoadTrip implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((bikers == null) ? 0 : bikers.hashCode());
-        result = prime * result + ((candidates == null) ? 0 : candidates.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((destinations == null) ? 0 : destinations.hashCode());
         result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
         result = prime * result + identifier;
         result = prime * result + kilometersAverage;
         result = prime * result + maxBikers;
-        result = prime * result + organizer;
         result = prime * result + ((roadTripType == null) ? 0 : roadTripType.hashCode());
-        result = prime * result + startAddress;
+        result = prime * result + ((startAddress == null) ? 0 : startAddress.hashCode());
         result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
         result = prime * result + ((status == null) ? 0 : status.hashCode());
-        result = prime * result + stopAddress;
+        result = prime * result + ((stopAddress == null) ? 0 : stopAddress.hashCode());
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
     }
@@ -208,16 +190,6 @@ public class RoadTrip implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         RoadTrip other = (RoadTrip) obj;
-        if (bikers == null) {
-            if (other.bikers != null)
-                return false;
-        } else if (!bikers.equals(other.bikers))
-            return false;
-        if (candidates == null) {
-            if (other.candidates != null)
-                return false;
-        } else if (!candidates.equals(other.candidates))
-            return false;
         if (description == null) {
             if (other.description != null)
                 return false;
@@ -239,7 +211,17 @@ public class RoadTrip implements Serializable {
             return false;
         if (maxBikers != other.maxBikers)
             return false;
+        if (organizer == null) {
+            if (other.organizer != null)
+                return false;
+        } else if (!organizer.equals(other.organizer))
+            return false;
         if (roadTripType != other.roadTripType)
+            return false;
+        if (startAddress == null) {
+            if (other.startAddress != null)
+                return false;
+        } else if (!startAddress.equals(other.startAddress))
             return false;
         if (startDate == null) {
             if (other.startDate != null)
@@ -248,6 +230,11 @@ public class RoadTrip implements Serializable {
             return false;
         if (status != other.status)
             return false;
+        if (stopAddress == null) {
+            if (other.stopAddress != null)
+                return false;
+        } else if (!stopAddress.equals(other.stopAddress))
+            return false;
         if (title == null) {
             if (other.title != null)
                 return false;
@@ -255,7 +242,5 @@ public class RoadTrip implements Serializable {
             return false;
         return true;
     }
-
-    
-    
+ 
 }

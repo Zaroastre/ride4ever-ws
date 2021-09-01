@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("reservationService")
 public final class ReservationService implements ReservationApi {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReservationService.class);
 
     @Autowired
     private ReservationRepository repository;
@@ -23,7 +26,15 @@ public final class ReservationService implements ReservationApi {
 
     @Override
     public Reservation create(Reservation entity) {
-        return this.repository.save(entity);
+        LOGGER.info("A new reservation will be registered...");
+        Reservation createdReservation = this.repository.save(entity);
+        if (createdReservation != null) {
+            LOGGER.info("Reservation is successfully registered as " + createdReservation.getIdentifier());
+        } else {
+            LOGGER.warn("New reservation is not registered.");
+        }
+        // return this.update(entity.getIdentifier(), entity);
+        return createdReservation;
     }
 
     @Override

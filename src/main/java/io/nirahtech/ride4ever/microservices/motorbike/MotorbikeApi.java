@@ -7,4 +7,5 @@ import io.nirahtech.ride4ever.infrastructure.api.Crud;
 interface MotorbikeApi extends Crud<Integer,  Motorbike> {
     List<Motorbike> findAll();
     Motorbike findByLicensePlate(final String licensePlate);
+    List<Motorbike> findByBikerPseudo(final String pseudo);
 }

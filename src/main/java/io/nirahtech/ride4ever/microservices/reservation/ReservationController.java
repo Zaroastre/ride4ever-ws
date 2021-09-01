@@ -64,12 +64,12 @@ public final class ReservationController implements ReservationApi {
     @GetMapping
     public List<Reservation> findAll(HttpServletRequest request) {
         List<Reservation> reservations = this.findAll();
-        if (request.getParameterMap().keySet().contains("organizer_pseudo")) {
-            Biker biker = bikerService.findByPseudo(request.getParameter("organizer_pseudo"));
+        if (request.getParameterMap().keySet().contains("biker_pseudo")) {
+            Biker biker = bikerService.findByPseudo(request.getParameter("biker_pseudo"));
             if (biker != null) {
                 reservations = reservations
                     .stream()
-                    .filter((reservation) -> reservation.getBiker() > 0 && reservation.getBiker() == biker.getIdentifier())
+                    .filter((reservation) -> reservation.getBiker() != null && reservation.getBiker().getIdentifier() == biker.getIdentifier())
                     .collect(Collectors.toList());
             }
         }
