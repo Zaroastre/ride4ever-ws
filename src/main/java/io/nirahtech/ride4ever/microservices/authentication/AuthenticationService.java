@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.authentication;
 
 import java.io.UnsupportedEncodingException;
@@ -51,7 +56,6 @@ public final class AuthenticationService implements AuthenticationApi {
                         .setId(UUID.randomUUID().toString())
                         .setIssuedAt(new Date())
                         .setExpiration(Date.from(Instant.now().plus(30, ChronoUnit.MINUTES)))
-                        // .claim("groups", account.getGroups())
                         .signWith(SignatureAlgorithm.HS256, AuthenticationService.KEY.toString().getBytes("UTF-8"))
                         .compact();
                 } catch (UnsupportedEncodingException e) {

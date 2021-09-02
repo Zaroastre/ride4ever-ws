@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever;
 
 import java.util.Collections;
@@ -18,22 +23,29 @@ import springfox.documentation.swagger.web.TagsSorter;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
-// @EnableSwagger2
 @Configuration
 public class SpringFoxConfig {
     
-    private ApiInfo apiInfo() {
+    /**
+     * 
+     * @return
+     */
+    public ApiInfo apiInfo() {
         return new ApiInfo(
-                "My REST API",
+                "Ride4Ever REST API",
                 "Some custom description of API.",
                 "API TOS",
                 "Terms of service",
-                new Contact("John Doe", "www.example.com", "myeaddress@company.com"),
+                new Contact("METIVIER Nicolas", "nirah-technology.fr", "nicolas.a.metivier@gmail.com"),
                 "License of API",
                 "API license URL",
                 Collections.emptyList());
     }
 
+    /**
+     * 
+     * @return
+     */
     @Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
@@ -43,6 +55,10 @@ public class SpringFoxConfig {
           .build();                                           
     }
 
+    /**
+     * 
+     * @return
+     */
     @Bean
     UiConfiguration uiConfig() {
         return UiConfigurationBuilder.builder()

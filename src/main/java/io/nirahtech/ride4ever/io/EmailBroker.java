@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.io;
 
 import java.util.Properties;
@@ -13,11 +18,28 @@ import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class that's tool to send an email.
+ * 
+ * @Author: METIVIER Nicolas <nicolas.a.metivier@gmail.com>
+ * @Date:   2020-08-25 23:42:29
+ * @Last Modified by: nicolas.a.metivier@gmail.com
+ * @Last Modified time: 2016-08-09 13:29:41
+ * @since 1.0.0
+ * @serial 20200902152723
+ */
 public final class EmailBroker {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(EmailBroker.class);
     
+    /**
+     * Send an email.
+     * @param subject Subject of the mail.
+     * @param text Content of the mail.
+     * @param destinations List of emails destinations.
+     */
     public static final void sendEmail(final String subject, final String text, final String... destinations) {
+        LOGGER.info("EmailBroker is call to send a email...");
         final String username = "nicolas.a.metivier@gmail.com";
         final String password = "zboclhfqcqvgvjex";
 
@@ -31,7 +53,6 @@ public final class EmailBroker {
             LOGGER.info(String.format("An email will be send to: %s", to));
         }
 
-        
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -40,7 +61,6 @@ public final class EmailBroker {
                 });
 
         try {
-
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             String destination = "";
@@ -61,5 +81,6 @@ public final class EmailBroker {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+        LOGGER.info("EmailBroker has finished it's task.");
     }
 }

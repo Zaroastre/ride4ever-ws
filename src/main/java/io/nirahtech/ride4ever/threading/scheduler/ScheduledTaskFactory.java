@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.threading.scheduler;
 
 import java.util.Date;

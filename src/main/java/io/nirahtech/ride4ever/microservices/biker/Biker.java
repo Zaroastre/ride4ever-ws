@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.biker;
 
 import java.io.Serializable;
@@ -5,12 +10,10 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +25,6 @@ import javax.persistence.UniqueConstraint;
 
 import io.nirahtech.ride4ever.microservices.address.Address;
 import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
-import io.nirahtech.ride4ever.microservices.reservation.Reservation;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "email", "phoneNumber", "pseudo" }))
@@ -66,7 +68,6 @@ public final class Biker implements Serializable {
     private String allergies;
 
     private int level;
-    // private int reputation;
 
     @OneToMany(mappedBy = "biker")
     private Set<Motorbike> motorbikes = new HashSet<>();

@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.engine.database.configuration;
 
 import javax.sql.DataSource;
@@ -15,6 +20,10 @@ public class DatabaseConfig {
   @Value("${spring.datasource.url}")
   private String dbUrl;
 
+  /**
+   * 
+   * @return
+   */
   @Bean
   public DataSource dataSource() {
       HikariConfig config = new HikariConfig();

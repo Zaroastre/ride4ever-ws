@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.recovery;
 
 import java.time.temporal.ChronoUnit;
@@ -25,7 +30,6 @@ final class GuardianThread extends Thread {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
         super.run();
     }
 

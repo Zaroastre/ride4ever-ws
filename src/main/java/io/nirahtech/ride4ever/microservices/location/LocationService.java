@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.location;
 
 import java.io.File;
@@ -33,10 +38,11 @@ public final class LocationService implements LocationApi {
     private final String DATABASE_FOLDER = "ip2location";
     private final String DATABASE_CODE = "DB9LITEBIN";
     private final String DATABASAE_FILE_NAME = "IP2LOCATION-LITE-DB9.BIN";
-    private final String URL = "https://www.ip2location.com/download/?token=g01TDjkhNY7TJbZVmjqU3YjmxvjQmzaigXBA1N4sOwlBqKAeBnxp9rMTHBUpyNW9&file="+DATABASE_CODE;
+    private final String URL = "https://www.ip2location.com/download/?token=g01TDjkhNY7TJbZVmjqU3YjmxvjQmzaigXBA1N4sOwlBqKAeBnxp9rMTHBUpyNW9&file="
+            + DATABASE_CODE;
     private final String ZIP_FILE = "IP2LOCATION-LITE-DB9.BIN.ZIP";
 
-    private File database = null; 
+    private File database = null;
 
     private final File download(String code, String destination) {
         LOGGER.info("Starting download process...");
@@ -59,12 +65,10 @@ public final class LocationService implements LocationApi {
     private static File unzip(String zipFilePath, String destDir) {
         LOGGER.info("Starting unzip process...");
         File dir = new File(destDir);
-        // create output directory if it doesn't exist
         if (!dir.exists())
             dir.mkdirs();
         FileInputStream fis;
         File binfile = null;
-        // buffer for read and write data to file
         byte[] buffer = new byte[1024];
         try {
             fis = new FileInputStream(zipFilePath);
@@ -76,7 +80,6 @@ public final class LocationService implements LocationApi {
                     File newFile = new File(destDir + File.separator + fileName);
                     binfile = newFile;
                     System.out.println("Unzipping to " + newFile.getAbsolutePath());
-                    // create directories for sub directories in zip
                     new File(newFile.getParent()).mkdirs();
                     FileOutputStream fos = new FileOutputStream(newFile);
                     int len;
@@ -85,11 +88,9 @@ public final class LocationService implements LocationApi {
                     }
                     fos.close();
                 }
-                // close this ZipEntry
                 zis.closeEntry();
                 ze = zis.getNextEntry();
             }
-            // close last ZipEntry
             zis.closeEntry();
             zis.close();
             fis.close();
@@ -105,7 +106,7 @@ public final class LocationService implements LocationApi {
         boolean mustBeDownloaded = false;
         File zipFile = null;
         if (potentialZipFile.exists()) {
-            Instant lastModified = Instant.ofEpochSecond(potentialZipFile.lastModified()/1000);
+            Instant lastModified = Instant.ofEpochSecond(potentialZipFile.lastModified() / 1000);
             long hours = ChronoUnit.HOURS.between(lastModified, Instant.now());
             if (hours >= 2) {
                 mustBeDownloaded = true;
@@ -150,19 +151,18 @@ public final class LocationService implements LocationApi {
 
     @Override
     public String resolve(final double latitude, final double longitude) {
+        String result = null;
         try {
             HttpRequest request = HttpRequest.newBuilder().uri(new URI(String.format(
                     "https://api.opencagedata.com/geocode/v1/json?q=%s+%s&key=641c51bed8ab490184632ad8526e29ad&no_annotations=1&language=en",
                     latitude, longitude))).version(HttpClient.Version.HTTP_2).GET().build();
-
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
-            return response.body();
-
+            result = response.body();
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-            return null;
+            result = null;
         }
+        return result;
     }
 }

@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.motorbike;
 
 import java.util.ArrayList;
@@ -11,7 +16,7 @@ import org.springframework.stereotype.Component;
 public final class MotorbikeService implements MotorbikeApi {
     
     @Autowired
-    private MotorbikeRepository repository;
+    private Garage garage;
 
     private static final MotorbikeService SINGLETON = new MotorbikeService();
 
@@ -23,12 +28,12 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike create(Motorbike entity) {
-        return this.repository.save(entity);
+        return this.garage.save(entity);
     }
 
     @Override
     public Motorbike read(Integer identifier) {
-        Optional<Motorbike> entity = this.repository.findById(identifier);
+        Optional<Motorbike> entity = this.garage.findById(identifier);
         if (entity.isPresent()) {
             return entity.get();
         }
@@ -37,14 +42,14 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike update(Integer identifier, Motorbike entity) {
-        return this.repository.save(entity);
+        return this.garage.save(entity);
     }
 
     @Override
     public Motorbike delete(Integer identifier) {
         Motorbike entity = this.read(identifier);
         if (entity != null) {
-            this.repository.deleteById(entity.getIdentifier());
+            this.garage.deleteById(entity.getIdentifier());
         }
         return entity;
     }
@@ -52,7 +57,7 @@ public final class MotorbikeService implements MotorbikeApi {
     @Override
     public List<Motorbike> findAll() {
         List<Motorbike> list = new ArrayList<>();
-        this.repository.findAll().forEach((item) -> {
+        this.garage.findAll().forEach((item) -> {
             list.add(item);
         });
         return list;
@@ -60,12 +65,12 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike findByLicensePlate(String licensePlate) {
-        return this.repository.findByLicensePlate(licensePlate);
+        return this.garage.findByLicensePlate(licensePlate);
     }
 
     @Override
     public List<Motorbike> findByBikerPseudo(String pseudo) {
-        return this.repository.findByBikerPseudo(pseudo);
+        return this.garage.findByBikerPseudo(pseudo);
     }
 
 }

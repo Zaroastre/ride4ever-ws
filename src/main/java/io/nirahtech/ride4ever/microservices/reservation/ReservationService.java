@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.reservation;
 
 import java.util.ArrayList;
@@ -33,7 +38,6 @@ public final class ReservationService implements ReservationApi {
         } else {
             LOGGER.warn("New reservation is not registered.");
         }
-        // return this.update(entity.getIdentifier(), entity);
         return createdReservation;
     }
 

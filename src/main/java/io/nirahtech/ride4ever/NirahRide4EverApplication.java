@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever;
 
 import java.sql.SQLException;
@@ -71,6 +76,12 @@ public class NirahRide4EverApplication {
         application.start(arguments);
     }
 
+    /**
+     * 
+     * @param dataSource
+     * @param jpaVendorAdapter
+     * @return
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
             JpaVendorAdapter jpaVendorAdapter) {
@@ -81,6 +92,10 @@ public class NirahRide4EverApplication {
         return emfb;
     }
 
+    /**
+     * 
+     * @return
+     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -91,26 +106,40 @@ public class NirahRide4EverApplication {
         };
     }
 
+    /**
+     * 
+     * @return
+     * @throws SQLException
+     */
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server h2Server() throws SQLException {
         return Server.createTcpServer("-tcp", "-ifNotExists", "-tcpAllowOthers", "-tcpPort", "8084");
     }
 
+    /**
+     * 
+     * @return
+     */
     @Bean
     public FilterRegistrationBean<LogFilter> filterRegistrationBean() {
         FilterRegistrationBean<LogFilter> registrationBean = new FilterRegistrationBean<>();
         LogFilter filter = new LogFilter();
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns("/*");
-        // registrationBean.setOrder(2); // set precedence
         return registrationBean;
     }
 
-    @Bean
-    public CommandLineRunner mappingBiker(BikerService bikerService,
-    MotorbikeService motorbikeService,
-    RoadTripService roadTripService,
-                                         AddressService addressService) {
+    /**
+     * 
+     * @param bikerService
+     * @param motorbikeService
+     * @param roadTripService
+     * @param addressService
+     * @return
+     */
+    // @Bean
+    public CommandLineRunner mappingBiker(BikerService bikerService, MotorbikeService motorbikeService,
+            RoadTripService roadTripService, AddressService addressService) {
         return args -> {
 
             Address address = new Address();

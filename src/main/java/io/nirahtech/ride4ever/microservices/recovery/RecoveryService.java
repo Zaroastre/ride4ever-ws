@@ -1,3 +1,8 @@
+/******************************************************************
+ * Copyright 2021 Ride4Ever
+ * 
+ * TO BE DEFINED
+ ******************************************************************/
 package io.nirahtech.ride4ever.microservices.recovery;
 
 import java.time.temporal.ChronoUnit;
@@ -45,6 +50,7 @@ final class RecoveryService implements RecoveryApi {
 
     @Override
     public Recovery sendCodeByEmailTo(Recovery recovery) throws RuntimeException {
+        Recovery result = null;
         if (recovery != null) {
             if (recovery.getIdentity() != null && recovery.getToken() != null) {
                 if (RECOVERIES.containsKey(UUID.fromString(recovery.getToken()))) {
@@ -55,12 +61,11 @@ final class RecoveryService implements RecoveryApi {
                     RECOVERIES.remove(UUID.fromString(guardian.getRecovery().getIdentity()));
                     guardian.getRecovery().setToken(token.toString());
                     RECOVERIES.put(UUID.fromString(guardian.getRecovery().getIdentity()), guardian);
-                    return guardian.getRecovery();
+                    result = guardian.getRecovery();
                 }
             }
         }
-        // TODO Auto-generated method stub
-        return null;
+        return result;
     }
 
     @Override
@@ -70,6 +75,7 @@ final class RecoveryService implements RecoveryApi {
 
     @Override
     public Recovery verifyCode(Recovery recovery) throws RuntimeException {
+        Recovery result = null;
         if (recovery != null) {
             if (recovery.getIdentity() != null && recovery.getToken() != null && recovery.getCode() != null) {
                 if (RECOVERIES.containsKey(UUID.fromString(recovery.getToken()))) {
@@ -79,17 +85,17 @@ final class RecoveryService implements RecoveryApi {
                         RECOVERIES.remove(UUID.fromString(guardian.getRecovery().getIdentity()));
                         guardian.getRecovery().setToken(token.toString());
                         RECOVERIES.put(UUID.fromString(guardian.getRecovery().getIdentity()), guardian);
-                        return guardian.getRecovery();
+                        result = guardian.getRecovery();
                     }
                 }
             }
         }
-        // TODO Auto-generated method stub
-        return null;
+        return result;
     }
 
     @Override
     public Recovery changePassword(Recovery recovery) throws RuntimeException {
+        Recovery result = null;
         if (recovery != null) {
             if (recovery.getIdentity() != null && recovery.getToken() != null && recovery.getCode() != null && recovery.getPassword() != null) {
                 if (RECOVERIES.containsKey(UUID.fromString(recovery.getToken()))) {
@@ -102,8 +108,7 @@ final class RecoveryService implements RecoveryApi {
                 }
             }
         }
-        // TODO Auto-generated method stub
-        return null;
+        return result;
     }
 
 }
