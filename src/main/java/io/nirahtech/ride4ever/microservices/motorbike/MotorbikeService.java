@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public final class MotorbikeService implements MotorbikeApi {
     
     @Autowired
-    private Garage garage;
+    private MotorbikeRepository repository;
 
     private static final MotorbikeService SINGLETON = new MotorbikeService();
 
@@ -28,12 +28,12 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike create(Motorbike entity) {
-        return this.garage.save(entity);
+        return this.repository.save(entity);
     }
 
     @Override
     public Motorbike read(Integer identifier) {
-        Optional<Motorbike> entity = this.garage.findById(identifier);
+        Optional<Motorbike> entity = this.repository.findById(identifier);
         if (entity.isPresent()) {
             return entity.get();
         }
@@ -42,14 +42,14 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike update(Integer identifier, Motorbike entity) {
-        return this.garage.save(entity);
+        return this.repository.save(entity);
     }
 
     @Override
     public Motorbike delete(Integer identifier) {
         Motorbike entity = this.read(identifier);
         if (entity != null) {
-            this.garage.deleteById(entity.getIdentifier());
+            this.repository.deleteById(entity.getIdentifier());
         }
         return entity;
     }
@@ -57,7 +57,7 @@ public final class MotorbikeService implements MotorbikeApi {
     @Override
     public List<Motorbike> findAll() {
         List<Motorbike> list = new ArrayList<>();
-        this.garage.findAll().forEach((item) -> {
+        this.repository.findAll().forEach((item) -> {
             list.add(item);
         });
         return list;
@@ -65,12 +65,12 @@ public final class MotorbikeService implements MotorbikeApi {
 
     @Override
     public Motorbike findByLicensePlate(String licensePlate) {
-        return this.garage.findByLicensePlate(licensePlate);
+        return this.repository.findByLicensePlate(licensePlate);
     }
 
     @Override
     public List<Motorbike> findByBikerPseudo(String pseudo) {
-        return this.garage.findByBikerPseudo(pseudo);
+        return this.repository.findByBikerPseudo(pseudo);
     }
 
 }

@@ -78,6 +78,15 @@ public final class ReservationController implements ReservationApi {
                     .collect(Collectors.toList());
             }
         }
+        if (request.getParameterMap().keySet().contains("roadtrip_organizer_pseudo")) {
+            Biker organizer = bikerService.findByPseudo(request.getParameter("roadtrip_organizer_pseudo"));
+            if (organizer != null) {
+                reservations = reservations
+                    .stream()
+                    .filter((reservation) -> reservation.getBiker() != null && reservation.getRoadTrip().getOrganizer().getIdentifier() == organizer.getIdentifier())
+                    .collect(Collectors.toList());
+            }
+        }
         if (request.getParameterMap().keySet().contains("date")) {
             reservations = reservations
                 .stream()

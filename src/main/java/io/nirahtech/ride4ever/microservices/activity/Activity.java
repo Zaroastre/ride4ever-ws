@@ -7,6 +7,7 @@ package io.nirahtech.ride4ever.microservices.activity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public final class Activity implements Serializable, Comparable<Activity> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "activity_id")
     private int identifier;
-    private Timestamp date;
+    private Timestamp date = Timestamp.from(Instant.now());
     @Enumerated(EnumType.STRING)
     private EventType event;
     private String pseudo;
@@ -67,6 +68,12 @@ public final class Activity implements Serializable, Comparable<Activity> {
     
     public Activity() {
 
+    }
+    
+    public Activity(EventType event, String pseudo, String detail) {
+        this.event = event;
+        this.pseudo = pseudo;
+        this.detail = detail;
     }
     
     public Activity(Timestamp date, EventType event, String pseudo, String detail) {

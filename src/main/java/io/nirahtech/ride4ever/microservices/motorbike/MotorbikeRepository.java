@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository("garage")
-public interface Garage extends CrudRepository<Motorbike, Integer> {
+@Repository("motorbikeRepository")
+public interface MotorbikeRepository extends CrudRepository<Motorbike, Integer> {
     Motorbike findByLicensePlate(final String licensePlate);
 
     @Query("SELECT m FROM Motorbike m WHERE m.biker.pseudo=?1")

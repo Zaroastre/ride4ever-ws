@@ -18,16 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import io.nirahtech.ride4ever.io.EmailBroker;
-
 @CrossOrigin("*")
 @RequestMapping("/bikers")
 @RestController
 public final class BikerController implements BikerApi {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BikerController.class);
 
     @Autowired
     private BikerService service;
@@ -35,21 +29,7 @@ public final class BikerController implements BikerApi {
     @PostMapping
     @Override
     public Biker create(@RequestBody Biker entity) {
-        Biker createdAcount = this.service.create(entity);
-        LOGGER.info("Created account: " + createdAcount);
-        if (createdAcount != null) {
-            LOGGER.info("Sending email to " + createdAcount.getEmail());
-            EmailBroker.sendEmail(
-                "Ride4Ever - Registration",
-                String.format(
-                    "Welcome %s ! You are now registered on the Ride4Ever application. Don't forget your password: %s",
-                    createdAcount.getPseudo(),
-                    createdAcount.getPassword()
-                ),
-                createdAcount.getEmail()
-            );
-        }
-        return createdAcount;
+        return this.service.create(entity);
     }
 
     @GetMapping("/{identifier}")
