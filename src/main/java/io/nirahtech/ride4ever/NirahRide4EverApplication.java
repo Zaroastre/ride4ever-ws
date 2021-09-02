@@ -125,7 +125,9 @@ public class NirahRide4EverApplication {
             Biker biker = new Biker();
             biker.setFirstName("Nicolas");
             biker.setLastName("METIVIER");
-            biker.setBirthDate(Timestamp.from(Instant.now()));
+            biker.setBirthDate(Timestamp.from(Instant.parse("1993-01-06T07:45:00.00Z")));
+            biker.setDriverLicenceDate(Timestamp.from(Instant.parse("2020-06-26T00:00:00.00Z")));
+            biker.setRegistrationDate(Timestamp.from(Instant.now()));
             biker.setPseudo("Jxalo");
             biker.setEmail("nicolas.a.metivier@gmail.com");
             biker.setGender(Gender.MALE.name());

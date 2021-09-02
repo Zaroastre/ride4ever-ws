@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import io.nirahtech.ride4ever.microservices.biker.Biker;
+import io.nirahtech.ride4ever.microservices.motorbike.Motorbike;
 import io.nirahtech.ride4ever.microservices.roadtrip.RoadTrip;
 
 @Entity
@@ -32,6 +33,10 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "roadtrip_id")
     private RoadTrip roadTrip;
     
+    @ManyToOne
+    @JoinColumn(name = "motorbike_id")
+    private Motorbike motorbike;
+
     private Timestamp date;
 
     @Enumerated(EnumType.STRING)
@@ -59,6 +64,13 @@ public class Reservation implements Serializable {
 
     public void setRoadTrip(RoadTrip roadTrip) {
         this.roadTrip = roadTrip;
+    }
+
+    public Motorbike getMotorbike() {
+        return motorbike;
+    }
+    public void setMotorbike(Motorbike motorbike) {
+        this.motorbike = motorbike;
     }
 
     public Timestamp getDate() {
