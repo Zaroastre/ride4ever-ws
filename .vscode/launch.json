@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch NirahRide4EverCatalogApplication",
+            "request": "launch",
+            "mainClass": "io.nirahtech.ride4ever.catalog.NirahRide4EverCatalogApplication",
+            "projectName": "ride4ever-catalog"
+        },
+        {
+            "type": "java",
+            "name": "Launch NirahRide4EverNotificationApplication",
+            "request": "launch",
+            "mainClass": "io.nirahtech.ride4ever.notification.NirahRide4EverNotificationApplication",
+            "projectName": "ride4ever-notification"
+        },
+        {
+            "type": "java",
+            "name": "Launch NirahRide4EverGatewayApplication",
+            "request": "launch",
+            "mainClass": "io.nirahtech.ride4ever.gateway.NirahRide4EverGatewayApplication",
+            "projectName": "ride4ever-gateway"
+        },
+        {
+            "type": "java",
             "name": "Launch NirahRide4EverApplication",
             "request": "launch",
             "mainClass": "io.nirahtech.ride4ever.NirahRide4EverApplication",

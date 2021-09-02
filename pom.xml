@@ -1,501 +1,499 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>io.nirahtech</groupId>
-    <artifactId>ride4ever</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>ride4ever</name>
-    <url>https://git-codecommit.eu-west-3.amazonaws.com/v1/repos/ride4ever</url>
-    <scm>
-        <connection>scm:git:ssh://git-codecommit.eu-west-3.amazonaws.com/v1/repos/ride4ever</connection>
-        <tag>HEAD</tag>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.nirahtech</groupId>
+  <artifactId>ride4ever</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>ride4ever</name>
+  <url>https://git-codecommit.eu-west-3.amazonaws.com/v1/repos/ride4ever</url>
+  <scm>
+    <connection>scm:git:ssh://git-codecommit.eu-west-3.amazonaws.com/v1/repos/ride4ever</connection>
+    <tag>HEAD</tag>
     </scm>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.3</version>
-        <relativePath/>
-        <!-- lookup parent from repository -->
+  <packaging>pom</packaging>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.5.3</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
     </parent>
-    <distributionManagement>
-        <repository>
-            <id>Artifactory</id>
-            <name>Artifactory-releases</name>
-            <url>https://eu-west-3.console.aws.amazon.com/codesuite/codecommit/repositories/engie-ineo-maven-repository/browse?region=eu-west-3</url>
+  <modules>
+    <module>ride4ever-geolocation</module>
+    <module>ride4ever-gateway</module>
+    <module>ride4ever-garage</module>
+    <module>ride4ever-ride</module>
+    <module>ride4ever-auth</module>
+    <module>ride4ever-catalog</module>
+    <module>ride4ever-order</module>
+    <module>ride4ever-notification</module>
+    </modules>
+  <distributionManagement>
+    <repository>
+                <id>Artifactory</id>
+                <name>Artifactory-releases</name>
+                <url>https://eu-west-3.console.aws.amazon.com/codesuite/codecommit/repositories/engie-ineo-maven-repository/browse?region=eu-west-3</url>
         </repository>
-        <snapshotRepository>
-            <id>Artifactory</id>
-            <name>Artifactory-snapshots</name>
-            <url>https://eu-west-3.console.aws.amazon.com/codesuite/codecommit/repositories/engie-ineo-maven-repository/browse?region=eu-west-3</url>
+    <snapshotRepository>
+                <id>Artifactory</id>
+                <name>Artifactory-snapshots</name>
+                <url>https://eu-west-3.console.aws.amazon.com/codesuite/codecommit/repositories/engie-ineo-maven-repository/browse?region=eu-west-3</url>
         </snapshotRepository>
     </distributionManagement>
-    <developers>
-        <developer>
-            <id>nicolas.metivier</id>
-            <name>Nicolas METIVIER</name>
-            <email>nicolas.a.metivier@gmail.com</email>
-            <url>https://github.com/Zaroastre</url>
-            <organization>NIRAH-TECHNOLOGY</organization>
-            <organizationUrl>https://fr.wikipedia.org/wiki/Engie_Ineo</organizationUrl>
-            <roles>
-                <role>CEO</role>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>Europe/Paris</timezone>
-            <properties>
-                <picUrl>https://avatars.githubusercontent.com/u/31073596?v=4</picUrl>
-            </properties>
+  <developers>
+    <developer>
+                <id>nicolas.metivier</id>
+                <name>Nicolas METIVIER</name>
+                <email>nicolas.a.metivier@gmail.com</email>
+                <url>https://github.com/Zaroastre</url>
+                <organization>NIRAH-TECHNOLOGY</organization>
+                <organizationUrl>https://fr.wikipedia.org/wiki/Engie_Ineo</organizationUrl>
+                <roles>
+                            <role>CEO</role>
+                            <role>architect</role>
+                            <role>developer</role>
+                    </roles>
+                <timezone>Europe/Paris</timezone>
+                <properties>
+                            <picUrl>https://avatars.githubusercontent.com/u/31073596?v=4</picUrl>
+                    </properties>
         </developer>
     </developers>
-    <properties>
-        <start-class>io.nirahtech.ride4ever.NirahRide4EverApplication</start-class>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>14</java.version>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.target>14</maven.compiler.target>
-        <hibernate.version>5.5.0.Final</hibernate.version>
-        <spring-cloud.version>2020.0.3</spring-cloud.version>
+  <properties>
+    <start-class>io.nirahtech.ride4ever.NirahRide4EverApplication</start-class>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>14</java.version>
+    <maven.compiler.source>14</maven.compiler.source>
+    <maven.compiler.target>14</maven.compiler.target>
+    <hibernate.version>5.5.0.Final</hibernate.version>
+    <spring-cloud.version>2020.0.3</spring-cloud.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-        <!-- <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <version>3.0.3</version>
-    </dependency>
+  <dependencies>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-      <version>3.0.3</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-<dependency>
-    <groupId>org.postgresql</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>42.2.23</version>
-</dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
-            <scope>runtime</scope>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>2.5.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>2.7.3</version>
-            <scope>runtime</scope>
+    <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jersey</artifactId>
+                <version>2.5.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-            <version>2.5.3</version>
+    <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.5.3</version>
         </dependency>
-        <!-- <dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>42.2.23</version>
+        </dependency>
+    <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.200</version>
+                <scope>runtime</scope>
+        </dependency>
+    <dependency>
+                <groupId>org.mariadb.jdbc</groupId>
+                <artifactId>mariadb-java-client</artifactId>
+                <version>2.7.3</version>
+                <scope>runtime</scope>
+        </dependency>
+    <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>2.5.3</version>
+        </dependency>
+    <!-- <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
       <version>2.5.3</version>
     </dependency> -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>3.0.0</version>
+    <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>3.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.200</version>
+    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>1.4.200</version>
         </dependency>
-
+    <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-ldap -->
+    <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-ldap</artifactId>
+                <version>5.5.1</version>
+        </dependency>
+    <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>3.0.0</version>
+        </dependency>
+    <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>3.0.0</version>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+    <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.1</version>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
+    <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>0.11.2</version>
+                <scope>runtime</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+    <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>0.11.2</version>
+        </dependency>
+    <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.1.1</version>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
+    <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>2.0.SP1</version>
+                <scope>provided</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.json.bind/javax.json.bind-api -->
+    <dependency>
+                <groupId>javax.json.bind</groupId>
+                <artifactId>javax.json.bind-api</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+    <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>8.0.1</version>
+                <scope>provided</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/org.jvnet.mimepull/mimepull -->
+    <dependency>
+                <groupId>org.jvnet.mimepull</groupId>
+                <artifactId>mimepull</artifactId>
+                <version>1.9.14</version>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
+    <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-api</artifactId>
+                <version>9.1.0</version>
+                <scope>provided</scope>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+    <dependency>
+                <groupId>org.hibernate.javax.persistence</groupId>
+                <artifactId>hibernate-jpa-2.1-api</artifactId>
+                <version>1.0.2.Final</version>
+        </dependency>
+    <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+        </dependency>
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.26</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>7.0.1.Final</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-c3p0 -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>6.0.0.Alpha8</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.7</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-sse -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-sse</artifactId>
+            <version>3.4.4</version>
+    </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.8.0</version>
+    </dependency>
+        <dependency>
+            			
+          <groupId>com.sun.mail</groupId>
+            			
+          <artifactId>javax.mail</artifactId>
+            			
+          <version>1.6.2</version>
+            		
+      </dependency>
+    <!-- https://mvnrepository.com/artifact/com.ip2location/ip2location-java -->
+      <dependency>
+        <groupId>com.ip2location</groupId>
+        <artifactId>ip2location-java</artifactId>
+        <version>8.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
             <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-ldap -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId>
-            <version>5.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>0.11.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>0.11.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>2.0.SP1</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.json.bind/javax.json.bind-api -->
-        <dependency>
-            <groupId>javax.json.bind</groupId>
-            <artifactId>javax.json.bind-api</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jvnet.mimepull/mimepull -->
-        <dependency>
-            <groupId>org.jvnet.mimepull</groupId>
-            <artifactId>mimepull</artifactId>
-            <version>1.9.14</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.2.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-        <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.26</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
-    <dependency>
-        <groupId>javax.persistence</groupId>
-        <artifactId>persistence-api</artifactId>
-        <version>1.0.2</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
-    <dependency>
-        <groupId>org.hibernate.validator</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>7.0.1.Final</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-c3p0 -->
-    <dependency>
-        <groupId>org.hibernate.orm</groupId>
-        <artifactId>hibernate-c3p0</artifactId>
-        <version>6.0.0.Alpha8</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-    <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <version>2.0.1.Final</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.7</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-sse -->
-    <dependency>
-        <groupId>org.apache.cxf</groupId>
-        <artifactId>cxf-rt-rs-sse</artifactId>
-        <version>3.4.4</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
-    <dependency>
-        <groupId>commons-net</groupId>
-        <artifactId>commons-net</artifactId>
-        <version>3.8.0</version>
-    </dependency>
-    <dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-        <!-- https://mvnrepository.com/artifact/com.ip2location/ip2location-java -->
-<dependency>
-    <groupId>com.ip2location</groupId>
-    <artifactId>ip2location-java</artifactId>
-    <version>8.6.0</version>
-</dependency>
-
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13.2</version>
-        <scope>test</scope>
-    </dependency>
-</dependencies>
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>${spring-cloud.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-
+  </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                        <groupId>org.springframework.cloud</groupId>
+                        <artifactId>spring-cloud-dependencies</artifactId>
+                        <version>${spring-cloud.version}</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                </dependency>
     </dependencies>
-</dependencyManagement>
-<repositories>
-    <repository>
-        <id>spring-milestones</id>
-        <name>Spring Milestones</name>
-        <url>https://repo.spring.io/milestone</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
+  </dependencyManagement>
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                        <enabled>false</enabled>
+                </snapshots>
     </repository>
-    <repository>
-        <id>spring-snapshots</id>
-        <name>Spring Snapshots</name>
-        <url>https://repo.spring.io/snapshot</url>
-        <releases>
-            <enabled>false</enabled>
-        </releases>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                        <enabled>false</enabled>
+                </releases>
     </repository>
-</repositories>
-<pluginRepositories>
-    <pluginRepository>
-        <id>spring-milestones</id>
-        <name>Spring Milestones</name>
-        <url>https://repo.spring.io/milestone</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
+  </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                        <enabled>false</enabled>
+                </snapshots>
     </pluginRepository>
-    <pluginRepository>
-        <id>spring-snapshots</id>
-        <name>Spring Snapshots</name>
-        <url>https://repo.spring.io/snapshot</url>
-        <releases>
-            <enabled>false</enabled>
-        </releases>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                        <enabled>false</enabled>
+                </releases>
     </pluginRepository>
-</pluginRepositories>
-<build>
-    <resources>
-        <resource>
-            <directory>${basedir}/src/main/resources</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-        </resource>
-        <resource>
-            <filtering>true</filtering>
-            <directory>${basedir}/src/main/resources</directory>
-            <includes>
-                <include>application.properties</include>
-            </includes>
-        </resource>
+  </pluginRepositories>
+    <build>
+        <resources>
+            <resource>
+                        <directory>${basedir}/src/main/resources</directory>
+                        <includes>
+                                    <include>**/*</include>
+                            </includes>
+                </resource>
+            <resource>
+                        <filtering>true</filtering>
+                        <directory>${basedir}/src/main/resources</directory>
+                        <includes>
+                                    <include>application.properties</include>
+                            </includes>
+                </resource>
     </resources>
-     
-    <plugins>
-    <plugin> 
-
-                <!-- Building an executable jar -->
-
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                  <archive>
-                    <manifest>
-
-                    <!-- give full qualified name of your main class-->
-                      <mainClass>${start-class}</mainClass>
-
-                    </manifest>
-                  </archive>
-                </configuration>
-    </plugin>
+           <plugins>
         <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-                <requiresUnpack>
-                    <dependency>
-                        <groupId>org.jruby</groupId>
-                        <artifactId>jruby-complete</artifactId>
-                    </dependency>
-                </requiresUnpack>
-                <mainClass>${start-class}</mainClass>
-                <layout>ZIP</layout>
-            </configuration>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                    <configuration>
-                        <classifier>exec</classifier>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>templating-maven-plugin</artifactId>
-            <version>1.0.0</version>
-            <executions>
-                <execution>
-                    <id>generate-verion-class</id>
-                    <goals>
-                        <goal>filter-sources</goal>
-                    </goals>
-                    <configuration>
-                        <sourceDirectory>${basedir}/src/main/java-templates</sourceDirectory>
-                        <outputDirectory>${project.build.directory}/generated-sources/java-templates</outputDirectory>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <!-- Build an executable JAR -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.2.0</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <classpathPrefix>lib/</classpathPrefix>
-                        <mainClass>${start-class}</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>3.2.0</version>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <classpathPrefix>lib/</classpathPrefix>
-                        <mainClass>${start-class}</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>copy-dependencies</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>copy-dependencies</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        <overWriteReleases>false</overWriteReleases>
-                        <overWriteSnapshots>false</overWriteSnapshots>
-                        <overWriteIfNewer>true</overWriteIfNewer>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.3.0</version>
-            <configuration>
-                <!--<source>14</source> -->
-                <doclint>none</doclint>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>attach-javadocs</id>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.2.1</version>
-            <executions>
-                <execution>
-                    <id>attach-sources</id>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-                <groupId>com.heroku.sdk</groupId>
-                <artifactId>heroku-maven-plugin</artifactId>
-                <version>3.0.4</version>
-                <configuration>
-                    <appName>heroku-demo-stackabuse</appName>
-                    <includeTarget>false</includeTarget>
-                    <includes>
-                        <include>${project.build.directory}/${project.build.finalName}-exec.jar</include>
-                    </includes>
-                    <jdkVersion>${java.version}</jdkVersion>
-                    <processTypes>
-                        <web>java $JAVA_OPTS -jar ${project.build.directory}/${project.build.finalName}-exec.jar</web>
-                    </processTypes>
-                </configuration>
+                 <!-- Building an executable jar -->
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <version>3.1.0</version>
+                            <configuration>
+                                      <archive>
+                                                <manifest>
+                                                        <!-- give full qualified name of your main class-->
+                                                          <mainClass>${start-class}</mainClass>
+                                                    </manifest>
+                                          </archive>
+                                </configuration>
             </plugin>
+            <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                                    <requiresUnpack>
+                                                <dependency>
+                                                            <groupId>org.jruby</groupId>
+                                                            <artifactId>jruby-complete</artifactId>
+                                                    </dependency>
+                                        </requiresUnpack>
+                                    <mainClass>${start-class}</mainClass>
+                                    <layout>ZIP</layout>
+                            </configuration>
+                        <executions>
+                                    <execution>
+                                                <goals>
+                                                            <goal>repackage</goal>
+                                                    </goals>
+                                                <configuration>
+                                                            <classifier>exec</classifier>
+                                                    </configuration>
+                                        </execution>
+                            </executions>
+                </plugin>
+            <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>templating-maven-plugin</artifactId>
+                        <version>1.0.0</version>
+                        <executions>
+                                    <execution>
+                                                <id>generate-verion-class</id>
+                                                <goals>
+                                                            <goal>filter-sources</goal>
+                                                    </goals>
+                                                <configuration>
+                                                            <sourceDirectory>${basedir}/src/main/java-templates</sourceDirectory>
+                                                            <outputDirectory>${project.build.directory}/generated-sources/java-templates</outputDirectory>
+                                                    </configuration>
+                                        </execution>
+                            </executions>
+                </plugin>
+            <plugin>
+                        <!-- Build an executable JAR -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                                    <archive>
+                                                <manifest>
+                                                            <addClasspath>true</addClasspath>
+                                                            <classpathPrefix>lib/</classpathPrefix>
+                                                            <mainClass>${start-class}</mainClass>
+                                                    </manifest>
+                                        </archive>
+                            </configuration>
+                </plugin>
+            <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                                    <archive>
+                                                <manifest>
+                                                            <addClasspath>true</addClasspath>
+                                                            <classpathPrefix>lib/</classpathPrefix>
+                                                            <mainClass>${start-class}</mainClass>
+                                                    </manifest>
+                                        </archive>
+                            </configuration>
+                        <executions>
+                                    <execution>
+                                                <id>copy-dependencies</id>
+                                                <phase>package</phase>
+                                                <goals>
+                                                            <goal>copy-dependencies</goal>
+                                                    </goals>
+                                                <configuration>
+                                                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                                            <overWriteReleases>false</overWriteReleases>
+                                                            <overWriteSnapshots>false</overWriteSnapshots>
+                                                            <overWriteIfNewer>true</overWriteIfNewer>
+                                                    </configuration>
+                                        </execution>
+                            </executions>
+                </plugin>
+            <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <configuration>
+                                    <!--<source>14</source> -->
+                                    <doclint>none</doclint>
+                            </configuration>
+                        <executions>
+                                    <execution>
+                                                <id>attach-javadocs</id>
+                                                <goals>
+                                                            <goal>jar</goal>
+                                                    </goals>
+                                        </execution>
+                            </executions>
+                </plugin>
+            <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                                    <execution>
+                                                <id>attach-sources</id>
+                                                <goals>
+                                                            <goal>jar</goal>
+                                                    </goals>
+                                        </execution>
+                            </executions>
+                </plugin>
+            <plugin>
+                            <groupId>com.heroku.sdk</groupId>
+                            <artifactId>heroku-maven-plugin</artifactId>
+                            <version>3.0.4</version>
+                            <configuration>
+                                        <appName>heroku-demo-stackabuse</appName>
+                                        <includeTarget>false</includeTarget>
+                                        <includes>
+                                                    <include>${project.build.directory}/${project.build.finalName}-exec.jar</include>
+                                            </includes>
+                                        <jdkVersion>${java.version}</jdkVersion>
+                                        <processTypes>
+                                                    <web>java $JAVA_OPTS -jar ${project.build.directory}/${project.build.finalName}-exec.jar</web>
+                                            </processTypes>
+                                </configuration>
+                    </plugin>
     </plugins>
-</build>
+  </build>
+  
 </project>
