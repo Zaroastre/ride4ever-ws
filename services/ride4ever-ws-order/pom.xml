@@ -2,14 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.nirahtech</groupId>
-    <artifactId>ride4ever</artifactId>
+    <artifactId>ride4ever-order</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>ride4ever</name>
+    <name>ride4ever-order</name>
 
     <url>https://ride4ever.nirah-technology.fr</url>
 
     <scm>
-        <connection>scm:git:ssh://github.com/ride4ever</connection>
+        <connection>scm:git:ssh://github.com/ride4ever-order</connection>
         <tag>HEAD</tag>
     </scm>
 
@@ -55,7 +55,7 @@
     </developers>
 
     <properties>
-        <start-class>io.nirahtech.ride4ever.NirahRide4EverApplication</start-class>
+        <start-class>io.nirahtech.ride4ever.order.NirahRide4EverOrderApplication</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>14</java.version>
@@ -89,11 +89,11 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
             <version>${spring-boot-starter.version}</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot-starter.version}</version>
-        </dependency> -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>3.0.3</version>
+        </dependency>
 
         <!-- DATABASES -->
         <dependency>
