@@ -74,7 +74,7 @@
             <version>3.0.3</version>
         </dependency>
     </dependencies>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -87,7 +87,7 @@
         </dependencies>
     </dependencyManagement>
 
-    
+
     <build>
         <resources>
             <resource>
@@ -247,5 +247,5 @@
             </plugin>
         </plugins>
     </build>
-  
+
 </project>
