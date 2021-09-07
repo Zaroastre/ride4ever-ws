@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.biker;
@@ -46,8 +46,8 @@ public final class BikerController implements BikerApi {
 
     @DeleteMapping("/{identifier}")
     @Override
-    public Biker delete(@PathVariable Integer identifier) {
-        return this.service.delete(identifier);
+    public void delete(@PathVariable Integer identifier) {
+        this.service.delete(identifier);
     }
 
     @GetMapping

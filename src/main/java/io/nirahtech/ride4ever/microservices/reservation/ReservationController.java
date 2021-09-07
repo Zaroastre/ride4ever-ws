@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.reservation;
@@ -58,8 +58,8 @@ public final class ReservationController implements ReservationApi {
 
     @DeleteMapping("/{identifier}")
     @Override
-    public Reservation delete(@PathVariable Integer identifier) {
-        return this.service.delete(identifier);
+    public void delete(@PathVariable Integer identifier) {
+        this.service.delete(identifier);
     }
 
     @Override

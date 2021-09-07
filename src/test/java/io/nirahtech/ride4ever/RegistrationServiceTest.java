@@ -5,6 +5,7 @@ import java.time.Instant;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import io.nirahtech.ride4ever.engine.encryption.PasswordEncrypt;
 import io.nirahtech.ride4ever.microservices.address.Address;
@@ -23,19 +24,19 @@ import io.nirahtech.ride4ever.microservices.roadtrip.RoadTripStatus;
 import io.nirahtech.ride4ever.microservices.roadtrip.RoadTripType;
 
 public class RegistrationServiceTest {
-    
+
     @Autowired
     BikerService bikerService;
-    
+
     @Autowired
     MotorbikeService motorbikeService;
-    
+
     @Autowired
     RoadTripService roadTripService;
-    
+
     @Autowired
     AddressService addressService;
-    
+
     @Test
     public void testReservation() {
         Address address = new Address();
@@ -56,6 +57,7 @@ public class RegistrationServiceTest {
         biker.setGender(Gender.MALE.name());
         biker.setPhoneNumber("06.23.33.57.03");
         biker.setPassword(PasswordEncrypt.encrypt("Ride4Ever"));
+        biker.setPassword(new BCryptPasswordEncoder().encode("Ride4Ever"));
         biker.setAddress(address);
         biker = bikerService.create(biker);
 

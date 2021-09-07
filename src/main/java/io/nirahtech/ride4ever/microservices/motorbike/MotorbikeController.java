@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.motorbike;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/motorbikes")
 @RestController
 public final class MotorbikeController implements MotorbikeApi {
-    
+
     @Autowired
     private MotorbikeService service;
 
@@ -48,8 +48,8 @@ public final class MotorbikeController implements MotorbikeApi {
 
     @DeleteMapping("/{identifier}")
     @Override
-    public Motorbike delete(@PathVariable Integer identifier) {
-        return this.service.delete(identifier);
+    public void delete(@PathVariable Integer identifier) {
+        this.service.delete(identifier);
     }
 
     @GetMapping

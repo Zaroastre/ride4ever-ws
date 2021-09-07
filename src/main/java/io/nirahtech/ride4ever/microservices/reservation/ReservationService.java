@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.reservation;
@@ -78,14 +78,13 @@ public final class ReservationService implements ReservationApi {
     }
 
     @Override
-    public Reservation delete(Integer identifier) {
+    public void delete(Integer identifier) {
         Reservation entity = this.read(identifier);
         if (entity != null) {
             this.repository.deleteById(entity.getIdentifier());
         }
         Activity activity = new Activity(EventType.CANCEL_CANDIDATE, entity.getBiker().getPseudo(), "Reservation canceled for road trip: " + entity.getRoadTrip().getTitle());
         activityService.create(activity);
-        return entity;
     }
 
     @Override

@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.biker;
@@ -46,12 +46,8 @@ public final class BikerService implements BikerApi {
     }
 
     @Override
-    public Biker delete(Integer identifier) {
-        Biker entity = this.read(identifier);
-        if (entity != null) {
-            this.repository.deleteById(entity.getIdentifier());
-        }
-        return entity;
+    public void delete(Integer identifier) {
+        this.repository.deleteById(identifier);
     }
 
     @Override

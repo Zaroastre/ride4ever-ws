@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.motorbike;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component("motorbikeService")
 public final class MotorbikeService implements MotorbikeApi {
-    
+
     @Autowired
     private MotorbikeRepository repository;
 
@@ -46,12 +46,8 @@ public final class MotorbikeService implements MotorbikeApi {
     }
 
     @Override
-    public Motorbike delete(Integer identifier) {
-        Motorbike entity = this.read(identifier);
-        if (entity != null) {
-            this.repository.deleteById(entity.getIdentifier());
-        }
-        return entity;
+    public void delete(Integer identifier) {
+        this.repository.deleteById(identifier);
     }
 
     @Override

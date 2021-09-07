@@ -3,7 +3,7 @@
  *
  * TO BE DEFINED
  ******************************************************************/
-package io.nirahtech.ride4ever.microservices.roadtrip;
+package io.nirahtech.ride4ever.microservices.club;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,28 +12,28 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("roadTripService")
-public final class RoadTripService implements RoadTripApi {
+@Component("motorcycleClubService")
+final class MotorcycleClubService implements MotorcycleClubApi {
 
     @Autowired
-    private RoadTripRepository repository;
+    private MotorcycleClubRepository repository;
 
-    private static final RoadTripService SINGLETON = new RoadTripService();
+    private static final MotorcycleClubService SINGLETON = new MotorcycleClubService();
 
-    private RoadTripService() { }
+    private MotorcycleClubService() { }
 
-    public static RoadTripService getInstance() {
+    public static MotorcycleClubService getInstance() {
         return SINGLETON;
     }
 
     @Override
-    public RoadTrip create(RoadTrip entity) {
+    public MotorcycleClub create(MotorcycleClub entity) {
         return this.repository.save(entity);
     }
 
     @Override
-    public RoadTrip read(Integer identifier) {
-        Optional<RoadTrip> entity = this.repository.findById(identifier);
+    public MotorcycleClub read(String id) {
+        Optional<MotorcycleClub> entity = this.repository.findById(id);
         if (entity.isPresent()) {
             return entity.get();
         }
@@ -41,18 +41,18 @@ public final class RoadTripService implements RoadTripApi {
     }
 
     @Override
-    public RoadTrip update(Integer identifier, RoadTrip entity) {
+    public MotorcycleClub update(String id, MotorcycleClub entity) {
         return this.repository.save(entity);
     }
 
     @Override
-    public void delete(Integer identifier) {
-        this.repository.deleteById(identifier);
+    public void delete(String id) {
+        this.repository.deleteById(id);
     }
 
     @Override
-    public List<RoadTrip> findAll() {
-        List<RoadTrip> list = new ArrayList<>();
+    public List<MotorcycleClub> findAll() {
+        List<MotorcycleClub> list = new ArrayList<>();
         this.repository.findAll().forEach((item) -> {
             list.add(item);
         });

@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.activity;
@@ -38,12 +38,8 @@ public final class ActivityService implements ActivityApi {
     }
 
     @Override
-    public Activity delete(Integer identifier) {
-        Activity entity = this.read(identifier);
-        if (entity != null) {
-            this.repository.deleteById(entity.getIdentifier());
-        }
-        return entity;
+    public void delete(Integer identifier) {
+        this.repository.deleteById(identifier);
     }
 
     @Override

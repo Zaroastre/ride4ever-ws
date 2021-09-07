@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.address;
@@ -46,8 +46,8 @@ public final class AddressController implements AddressApi {
 
     @DeleteMapping("/{identifier}")
     @Override
-    public Address delete(@PathVariable Integer identifier) {
-        return this.service.delete(identifier);
+    public void delete(@PathVariable Integer identifier) {
+        this.service.delete(identifier);
     }
 
     @GetMapping

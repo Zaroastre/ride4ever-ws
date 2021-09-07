@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever;
@@ -29,6 +29,10 @@ import io.nirahtech.ride4ever.infrastructure.interceptors.LogFilter;
 import io.nirahtech.ride4ever.microservices.address.Address;
 import io.nirahtech.ride4ever.microservices.address.AddressService;
 import io.nirahtech.ride4ever.microservices.address.Country;
+import io.nirahtech.ride4ever.microservices.auth.Role;
+import io.nirahtech.ride4ever.microservices.auth.RoleRepository;
+import io.nirahtech.ride4ever.microservices.auth.User;
+import io.nirahtech.ride4ever.microservices.auth.UserRepository;
 import io.nirahtech.ride4ever.microservices.biker.Biker;
 import io.nirahtech.ride4ever.microservices.biker.BikerService;
 import io.nirahtech.ride4ever.microservices.biker.Gender;
@@ -77,7 +81,7 @@ public class NirahRide4EverApplication {
     }
 
     /**
-     * 
+     *
      * @param dataSource
      * @param jpaVendorAdapter
      * @return
@@ -93,7 +97,7 @@ public class NirahRide4EverApplication {
     }
 
     /**
-     * 
+     *
      * @return
      */
     @Bean
@@ -107,7 +111,7 @@ public class NirahRide4EverApplication {
     }
 
     /**
-     * 
+     *
      * @return
      * @throws SQLException
      */
@@ -117,7 +121,7 @@ public class NirahRide4EverApplication {
     }
 
     /**
-     * 
+     *
      * @return
      */
     @Bean
@@ -130,7 +134,7 @@ public class NirahRide4EverApplication {
     }
 
     /**
-     * 
+     *
      * @param bikerService
      * @param motorbikeService
      * @param roadTripService
@@ -139,8 +143,20 @@ public class NirahRide4EverApplication {
      */
     // @Bean
     public CommandLineRunner mappingBiker(BikerService bikerService, MotorbikeService motorbikeService,
-            RoadTripService roadTripService, AddressService addressService) {
+            RoadTripService roadTripService, AddressService addressService, UserRepository userRepository, RoleRepository roleRepository) {
         return args -> {
+
+
+            Role userRole = new Role("USER");
+            Role adminRole = new Role("ADMIN");
+            roleRepository.save(userRole);
+            roleRepository.save(adminRole);
+
+            User user = new User();
+            user.setUsername("nicolas.a.metivier@gmail.com");
+            user.setPassword("Ride4Ever");
+            user.getRoles().add(userRole);
+            userRepository.save(user);
 
             Address address = new Address();
             address.setNumber(40);

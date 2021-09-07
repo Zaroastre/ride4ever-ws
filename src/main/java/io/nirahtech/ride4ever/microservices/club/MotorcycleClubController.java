@@ -3,9 +3,11 @@
  *
  * TO BE DEFINED
  ******************************************************************/
-package io.nirahtech.ride4ever.microservices.weather;
+package io.nirahtech.ride4ever.microservices.club;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,40 +21,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin("*")
-@RequestMapping("/weathers")
+@RequestMapping("/motorcycle-clubs")
 @RestController
-public final class WeatherController implements WeatherApi {
+public final class MotorcycleClubController implements MotorcycleClubApi {
 
     @Autowired
-    private WeatherService service;
+    private MotorcycleClubService service;
 
     @PostMapping
     @Override
-    public Weather create(@RequestBody Weather entity) {
+    public MotorcycleClub create(@RequestBody MotorcycleClub entity) {
         return this.service.create(entity);
     }
 
-    @GetMapping("/{identifier}")
+    @GetMapping("/{id}")
     @Override
-    public Weather read(@PathVariable Integer identifier) {
-        return this.service.read(identifier);
+    public MotorcycleClub read(@PathVariable String id) {
+        return this.service.read(id);
     }
 
-    @PutMapping("/{identifier}")
+    @PutMapping("/{id}")
     @Override
-    public Weather update(@PathVariable Integer identifier, @RequestBody Weather entity) {
-        return this.service.update(identifier, entity);
+    public MotorcycleClub update(@PathVariable String id, @RequestBody MotorcycleClub entity) {
+        return this.service.update(id, entity);
     }
 
-    @DeleteMapping("/{identifier}")
+    @DeleteMapping("/{id}")
     @Override
-    public void delete(@PathVariable Integer identifier) {
-        this.service.delete(identifier);
+    public void delete(@PathVariable String id) {
+        this.service.delete(id);
     }
 
     @GetMapping
+    public List<MotorcycleClub> findAll(HttpServletRequest request) {
+        List<MotorcycleClub> result = null;
+        if (result == null) {
+            result = this.findAll();
+        }
+        return result;
+    }
+
     @Override
-    public List<Weather> findAll() {
+    public List<MotorcycleClub> findAll() {
         return this.service.findAll();
     }
 

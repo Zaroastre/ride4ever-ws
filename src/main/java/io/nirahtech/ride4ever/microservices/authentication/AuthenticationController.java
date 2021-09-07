@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.authentication;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public final class AuthenticationController implements AuthenticationApi {
 
-    
+
     @Autowired
     private AuthenticationService service;
 
@@ -28,7 +28,8 @@ public final class AuthenticationController implements AuthenticationApi {
     @ResponseBody
     @Override
     public final Session login(@RequestBody final Credential credential) throws RuntimeException {
-        return this.service.login(credential);
+        // return this.service.login(credential);
+        return  null;
     }
 
     @DeleteMapping("/logout/{sessionID}")
@@ -37,5 +38,5 @@ public final class AuthenticationController implements AuthenticationApi {
     public void logout(@PathVariable String sessionID) throws RuntimeException {
         this.service.logout(sessionID);
     }
-    
+
 }

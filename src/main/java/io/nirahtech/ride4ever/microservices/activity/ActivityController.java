@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.activity;
@@ -44,7 +44,7 @@ public final class ActivityController implements ActivityApi {
     }
 
     @Override
-    public Activity delete(@PathVariable Integer identifier) {
+    public void delete(@PathVariable Integer identifier) {
         throw new NotImplementedException();
     }
 

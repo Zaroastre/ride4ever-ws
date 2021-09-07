@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.address;
@@ -47,12 +47,8 @@ public final class AddressService implements AddressApi {
     }
 
     @Override
-    public Address delete(Integer identifier) {
-        Address entity = this.read(identifier);
-        if (entity != null) {
-            this.repository.deleteById(entity.getIdentifier());
-        }
-        return entity;
+    public void delete(Integer identifier) {
+        this.repository.deleteById(identifier);
     }
 
     @Override

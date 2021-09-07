@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.registration;
@@ -65,8 +65,8 @@ public final class RegistrationController implements RegistrationApi {
     @DeleteMapping("/unregister")
     @ResponseBody
     @Override
-    public Biker delete(@RequestBody final Biker account) throws RuntimeException {
-        return this.service.delete(account);
+    public void delete(@RequestBody final Biker account) throws RuntimeException {
+        this.service.delete(account);
     }
 
 

@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.microservices.roadtrip;
@@ -31,7 +31,7 @@ public final class RoadTripController implements RoadTripApi {
 
     @Autowired
     private RoadTripService service;
-    
+
     @Autowired
     private BikerService bikerService;
 
@@ -56,8 +56,8 @@ public final class RoadTripController implements RoadTripApi {
 
     @DeleteMapping("/{identifier}")
     @Override
-    public RoadTrip delete(@PathVariable Integer identifier) {
-        return this.service.delete(identifier);
+    public void delete(@PathVariable Integer identifier) {
+        this.service.delete(identifier);
     }
 
     @Override

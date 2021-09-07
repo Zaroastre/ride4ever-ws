@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import io.nirahtech.ride4ever.engine.encryption.PasswordEncrypt;
@@ -28,14 +29,15 @@ public final class RegistrationService implements RegistrationApi {
     @Override
     public Biker create(Biker biker) throws RuntimeException {
         biker.setRegistrationDate(Timestamp.from(Instant.now()));
-        biker.setPassword(PasswordEncrypt.encrypt(biker.getPassword()));
+        // biker.setPassword(PasswordEncrypt.encrypt(biker.getPassword()));
+        biker.setPassword(new BCryptPasswordEncoder().encode(biker.getPassword()));
         Biker account = service.create(biker);
         if (account != null) {
             activityService.create(new Activity(Timestamp.from(Instant.now()), EventType.ACCOUNT_REGISTRATION, account.getPseudo(), null));
         }
         return account;
     }
-    
+
     @Override
     public Biker find(String email) throws RuntimeException {
         List<Biker> bikers = service.findAll().stream().filter((biker -> biker.getEmail().equalsIgnoreCase(email))).collect(Collectors.toList());
@@ -51,8 +53,8 @@ public final class RegistrationService implements RegistrationApi {
     }
 
     @Override
-    public Biker delete(Biker biker) throws RuntimeException {
-        return service.delete(biker.getIdentifier());
+    public void delete(Biker biker) throws RuntimeException {
+        service.delete(biker.getIdentifier());
     }
 
 }

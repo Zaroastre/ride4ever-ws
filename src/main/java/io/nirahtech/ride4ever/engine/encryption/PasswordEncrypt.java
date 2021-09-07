@@ -1,6 +1,6 @@
 /******************************************************************
  * Copyright 2021 Ride4Ever
- * 
+ *
  * TO BE DEFINED
  ******************************************************************/
 package io.nirahtech.ride4ever.engine.encryption;
@@ -10,11 +10,13 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.xml.bind.DatatypeConverter;
 
-public final class PasswordEncrypt {
-    private PasswordEncrypt() { }
-    
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public final class PasswordEncrypt extends BCryptPasswordEncoder{
+    public PasswordEncrypt() { }
+
     /**
-     * 
+     *
      * @param password
      * @return
      */
@@ -32,5 +34,10 @@ public final class PasswordEncrypt {
             return DatatypeConverter.printHexBinary(digest).toUpperCase();
         }
         return null;
+    }
+
+    @Override
+    public String encode(CharSequence rawPassword) {
+        return encrypt(rawPassword.toString());
     }
 }
